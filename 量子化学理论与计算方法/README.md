@@ -5,6 +5,8 @@
 
 ### 量子化学理论基础
 
+___
+
 [量子化学 (Levine 著) (第7版)](/量子化学理论与计算方法/Quantum Chemistry (7th edition).pdf)
 
 [量子化学 (Levine 原著) (第2版中译本)](/量子化学理论与计算方法/Levine量子化学（旧版中译本）.pdf)
@@ -15,9 +17,13 @@
 
 ### 分子模拟
 
+___
+
 [分子模拟入门 (Alan Hinchliffe 著)](/量子化学理论与计算方法/Molecular Modelling for Beginners.pdf)
 
 ### 计算方法（书名相似+个人懒散，故下面不再翻译）
+
+___
 
 [Computational Chemistry: A Practical Guide for Applying Techniques to Real-World Problems](/量子化学理论与计算方法/Computational Chemistry - A Practical Guide for Applying Techniques to Real-World Problems.pdf)
 
