@@ -11,6 +11,4 @@ ___
 
 [CHEM0120 线性代数](/CHEM0120 线性代数)
 
-[CHEM0211 数理统计](/CHEM0211 数理统计)
-
 [Gaussian 量子化学计算手册（ExpChem第二版中文节译本）.pdf](/Gaussian 量子化学计算手册（ExpChem第二版中文节译本）.pdf)
