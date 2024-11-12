@@ -9,7 +9,7 @@ Here are a few things I want to share with you.
 
 ___
 
-[CHEM0120 线性代数](/CHEM0120 线性代数)
+[线性代数（CHEM0120）](/CHEM0120 线性代数)
 
 [量子化学理论与计算方法](/量子化学理论与计算方法)
 
