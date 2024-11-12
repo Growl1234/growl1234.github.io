@@ -5,7 +5,7 @@
 
 ### This is Growl1234 from Nankai University. 
 
-Here are a few things I want to share with you.
+Here are a few things I want to share with you if you're interested in quantum chemistry and computational chemistry.
 
 ___
 
