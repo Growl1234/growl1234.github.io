@@ -8,6 +8,8 @@
 
 ___
 
+[Gaussian 16 Users Reference](https://gaussian.com/man/)
+
 [Exploring Chemistry with Electronic Structure Methods (2nd edition)](/计算化学应用与软件指南/Exploring Chemistry with Electronic Structure Methods (2nd edition).pdf)
 
 [Gaussian 量子化学计算手册（ExpChem第二版中文节译本）](/计算化学应用与软件指南/Gaussian 量子化学计算手册（ExpChem第二版中文节译本）.pdf)
