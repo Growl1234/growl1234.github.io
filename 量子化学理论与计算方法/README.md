@@ -1,10 +1,10 @@
 ## 量子化学理论与计算化学方法
 
 
+
 这里收录了一些与量子化学和计算化学相关的基础知识的外文书籍。
 
 ### 量子化学理论基础
-
 ___
 
 [量子化学 (Levine 著) (第7版)](/量子化学理论与计算方法/Quantum Chemistry (7th edition).pdf)
@@ -16,13 +16,11 @@ ___
 [习题参考答案](/量子化学理论与计算方法/Solutions Manual/)
 
 ### 分子模拟
-
 ___
 
 [分子模拟入门 (Alan Hinchliffe 著)](/量子化学理论与计算方法/Molecular Modelling for Beginners.pdf)
 
 ### 计算方法（书名相似+个人懒散，故下面不再翻译）
-
 ___
 
 [Computational Chemistry: A Practical Guide for Applying Techniques to Real-World Problems](/量子化学理论与计算方法/Computational Chemistry - A Practical Guide for Applying Techniques to Real-World Problems.pdf)
