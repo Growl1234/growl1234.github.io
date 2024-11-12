@@ -9,6 +9,12 @@ Here are a few things I want to share with you.
 
 ___
 
+**WARNING: YOU ARE NOT ALLOWED TO DISTRIBUTE ANY DOCUMENTS INSIDE EXCEPT FOR SPECIALLY MARKED ONES!!!**
+
+**警告：除特殊标注者外，不得擅自传播里面的任何文件！**
+
+___
+
 [线性代数（CHEM0120）](/CHEM0120 线性代数/)
 
 [量子化学理论与计算方法](/量子化学理论与计算方法/)
