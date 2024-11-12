@@ -18,7 +18,7 @@ ___
 
 ___
 
-[VASP官方手册](https://www.vasp.at/wiki/index.php/The_VASP_Manual)
+[VASP Manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual)
 
 ### 论坛
 
