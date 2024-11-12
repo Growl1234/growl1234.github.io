@@ -1,1 +1,1 @@
-Here is a textbook and three previous tests.
+线性代数（CHEM0120）曾是南开化学学院的指定选修课，后不知何故停开。这里是教材、教材习题答案和一些往年题目，供有兴趣者和自学者参考。
