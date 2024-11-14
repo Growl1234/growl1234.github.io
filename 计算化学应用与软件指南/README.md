@@ -20,7 +20,7 @@ ___
 
 [VASP Manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual)
 
-[调整堆栈限制（适用于用Ubuntu运行VASP的同学）](/计算化学应用与软件指南/调整堆栈限制.md)
+[调整堆栈限制（适用于用Ubuntu运行VASP的同学）](/计算化学应用与软件指南/调整堆栈限制/)
 
 ### 论坛
 
