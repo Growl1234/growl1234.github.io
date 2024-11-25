@@ -11,3 +11,5 @@
 然后，按照“https://theory.cm.utexas.edu/vtsttools/installation.html ”上的说明进行必要文件的修改。
 
 最后，回到编译时的目录，输入指令“make veryclean”清除之前的编译，然后“make all”重新编译。
+
+【也可以参考[这里](https://www.bigbrosci.com/2022/05/23/A31/?highlight=vtst)的链接。**可能需要说明的是，最后一步很多教程没有特别说明“make”一步是否需要清除以前的编译，个人亲自实践表明，如果不运行“make veryclean”而直接启动编译，很快就会出现报错信息而失败中断。**】
