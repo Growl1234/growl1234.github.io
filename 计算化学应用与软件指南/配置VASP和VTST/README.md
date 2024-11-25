@@ -8,7 +8,7 @@
 
 首先，确保VASP已经顺利编译，以防万一配置VTST后编译出现问题时无法确定问题所在。
 
-然后，按照“https://theory.cm.utexas.edu/vtsttools/installation.html ”上的说明进行必要文件的修改。
+然后，按照“https://theory.cm.utexas.edu/vtsttools/installation.html ”上的说明进行进行必要文件的修改和覆盖操作（为以防万一，建议提前备份好原有src目录下的文件）。
 
 最后，回到编译时的目录，输入指令“make veryclean”清除之前的编译，然后“make all”重新编译。
 
