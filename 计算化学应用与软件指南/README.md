@@ -26,8 +26,10 @@ ___
 
 [调整堆栈限制（适用于用Ubuntu运行VASP的同学）](/计算化学应用与软件指南/调整堆栈限制/)
 
-### 论坛
+### 推荐论坛
 
 ___
+
+[思想家公社（sobereva）](http://sobereva.com/)
 
 [计算化学公社](http://bbs.keinsci.com/forum.php)
