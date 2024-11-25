@@ -10,7 +10,7 @@
 
 然后，仔细阅读并按照[VTST官网的配置说明](https://theory.cm.utexas.edu/vtsttools/installation.html)进行必要的文件修改和覆盖操作（为以防万一，建议提前备份好原有src目录下的文件）。
 
-最后，回到编译时的目录，输入指令“make veryclean”清除之前的编译，然后“make all”重新编译。
+最后，回到编译时的目录，输入指令“make veryclean”清除之前的编译，然后“make”或“make all”重新编译。
 
 【也可以参考[Learn VASP the Hard Way里的相关文章](https://www.bigbrosci.com/2022/05/23/A31/?highlight=vtst)中的一些提示。】
 
