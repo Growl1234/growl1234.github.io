@@ -6,7 +6,7 @@
 
 ### 配置VTST
 
-首先，确保VASP已经顺利编译，以防万一配置VTST后编译出现问题时无法确定问题所在。
+首先，确保VASP已经顺利编译并能通过测试，以防万一配置VTST后重新编译出现问题时难以确定问题所在。
 
 然后，按照“https://theory.cm.utexas.edu/vtsttools/installation.html ”上的说明进行进行必要文件的修改和覆盖操作（为以防万一，建议提前备份好原有src目录下的文件）。
 
