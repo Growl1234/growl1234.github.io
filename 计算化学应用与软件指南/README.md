@@ -16,7 +16,7 @@ ___
 
 [Gaussian 量子化学计算手册（ExpChem第二版中文节译本）](/计算化学应用与软件指南/Gaussian 量子化学计算手册（ExpChem第二版中文节译本）.pdf)
 
-### 适用于VASP
+### 适用于VASP（以在Ubuntu系统中运行为例）
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 [VASP Manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual)
 
-[调整堆栈限制（适用于用Ubuntu运行VASP的同学）](/计算化学应用与软件指南/调整堆栈限制/)
+[调整堆栈限制](/计算化学应用与软件指南/调整堆栈限制/)
 
 ### 推荐论坛
 
