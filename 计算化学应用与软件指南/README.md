@@ -18,6 +18,8 @@ ___
 
 ___
 
+[关于配置VASP和VTST的简要说明](计算化学应用与软件指南/配置VASP和VTST)
+
 [VASP Manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual)
 
 [调整堆栈限制（适用于用Ubuntu运行VASP的同学）](/计算化学应用与软件指南/调整堆栈限制/)
