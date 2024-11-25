@@ -18,7 +18,7 @@ ___
 
 ___
 
-[关于配置VASP和VTST的简要说明](/计算化学应用与软件指南/配置VASP和VTST)
+[关于配置VASP和VTST的简要说明](/计算化学应用与软件指南/配置VASP和VTST/)
 
 [VASP Manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual)
 
