@@ -6,7 +6,7 @@
 
 一般推荐使用OneAPI。对于使用这一MPI库的同学，唯一需要注意的是可能需要根据你所安装的Intel OneAPI版本修改“makefile.include”里面的部分内容（以v2025.0为例，修改“icc”为“icx”，“icpc”为“icpx”，“mpiifort”为“mpiifx”），以及清空MKLROOT后面的示例路径（或在整行前加#）。
 
-根据[官网的这个链接|https://www.vasp.at/wiki/index.php/Personal_computer_installation]，也可以使用OpenMPI类库在自己的个人计算机上进行编译，如选用此方法，一字不差严格按照链接中的教程操作即可。
+根据[官网的这个链接](https://www.vasp.at/wiki/index.php/Personal_computer_installation)，也可以使用OpenMPI类库在自己的个人计算机上进行编译，如选用此方法，一字不差严格按照链接中的教程操作即可。
 
 ### 配置VTST
 
