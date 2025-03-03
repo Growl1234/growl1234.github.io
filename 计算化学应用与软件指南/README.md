@@ -22,9 +22,17 @@ ___
 
 [关于配置VASP和VTST的简要说明](/计算化学应用与软件指南/配置VASP和VTST/)
 
+[Learn VASP the Hard Way](https://www.bigbrosci.com/)
+
 [VASP Manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual)
 
-[调整堆栈限制](/计算化学应用与软件指南/调整堆栈限制/)
+[调整堆栈限制](/计算化学应用与软件指南/调整堆栈限制/) **（Ubuntu系统通用，不局限于VASP）**
+
+### 适用于CP2K（以在Ubuntu系统中运行为例）
+
+___
+
+[从源代码配置CP2K](/计算化学应用与软件指南/配置CP2K/)
 
 ### 推荐论坛
 
