@@ -100,4 +100,4 @@ make -j 6 ARCH=local VERSION="ssmp psmp" test
 
 Sobereva提供了一个小的测试性输入文件，可以自己去网站下载。也可以自己用一些简单任务的输入文件做测试。
 
-**注：（来自sobereva）如果你是自己编译的CP2K，建议默认用popt版而不要用ssmp版，因为在某些情况下后者运行效率远不及popt版（但也有些任务二者速度差异不大，看具体情况）。为了运行popt版省事，建议在~/.bashrc里面加入一行alias cp2k='mpirun -np 8 cp2k.popt'。重新进入终端后，只要输入cp2k test.inp |tee test.out就等价于输入mpirun -np 8 cp2k.popt test.inp |tee test.out了，用起来方便多了。（这里后面的“|tee test.out”指将终端上的输出信息保存在同目录下的“test.out”文件里，如果上传至服务器进行计算，请务必保证脚本中mpirun一行有这一部分。）**
+**注：（来自sobereva）如果你是自己编译的CP2K，建议默认用popt版而不要用ssmp版，因为在某些情况下后者运行效率远不及popt版（但也有些任务二者速度差异不大，看具体情况）。为了运行popt版省事，建议在~/.bashrc里面加入一行alias cp2k='mpirun -np 8 cp2k.popt'。重新进入终端后，只要输入“cp2k test.inp \|tee test.out”就等价于输入“mpirun -np 8 cp2k.popt test.inp \|tee test.out”了，用起来方便多了。（这里后面的“\|tee test.out”指将终端上的输出信息保存在同目录下的“test.out”文件里，如果上传至服务器进行计算，请务必保证脚本中mpirun一行有这一部分。）**
