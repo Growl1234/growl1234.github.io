@@ -10,7 +10,7 @@ ___
 
 [Gaussian 16 Users Reference](https://gaussian.com/man/)
 
-[Gaussian支持的基组以及输入基组时的一些注意事项](http://gaussian.com/basissets/)
+[Gaussian支持的基组以及输入基组时的一些注意事项](http://gaussian.com/basissets/) （外部链接）
 
 [Exploring Chemistry with Electronic Structure Methods (2nd edition)](/计算化学应用与软件指南/Exploring Chemistry with Electronic Structure Methods (2nd edition).pdf)
 
@@ -22,9 +22,9 @@ ___
 
 [关于配置VASP和VTST的简要说明](/计算化学应用与软件指南/配置VASP和VTST/)
 
-[Learn VASP the Hard Way](https://www.bigbrosci.com/)
+[Learn VASP the Hard Way](https://www.bigbrosci.com/) （外部链接）
 
-[VASP Manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual)
+[VASP Manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual) （外部链接）
 
 [调整堆栈限制](/计算化学应用与软件指南/调整堆栈限制/) **（Ubuntu系统通用，不局限于VASP）**
 
