@@ -8,7 +8,7 @@
 
 ___
 
-[Gaussian 16 Users Reference](https://gaussian.com/man/)
+[Gaussian 16 Users Reference](https://gaussian.com/man/) （外部链接）
 
 [Gaussian支持的基组以及输入基组时的一些注意事项](http://gaussian.com/basissets/) （外部链接）
 
