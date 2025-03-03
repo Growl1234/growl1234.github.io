@@ -94,12 +94,6 @@ source ~/.bashrc
 
 ### 4. 运行、测试
 
-可以直接在编译时的目录用以下指令进行一次测试（虽然我没有这么做，因为我还不清楚删除CP2K测试结果以免占用较多空间的指令是什么）：
-
-```shell
-make -j 6 ARCH=local VERSION="ssmp psmp" test
-```
-
-Sobereva提供了一个小的测试性输入文件，可以自己去网站下载。也可以自己用一些简单任务的输入文件做测试。
+Sobereva提供了一个小的测试性输入文件，可以自己去网站下载。也可以自己用一些简单任务的输入文件做测试。测试成功，说明安装的CP2K没有问题，恭喜你，可以放心开始使用了。
 
 **注：（来自sobereva）如果你是自己编译的CP2K，建议默认用popt版而不要用ssmp版，因为在某些情况下后者运行效率远不及popt版（但也有些任务二者速度差异不大，看具体情况）。为了运行popt版省事，建议在~/.bashrc里面加入一行alias cp2k='mpirun -np 8 cp2k.popt'。重新进入终端后，只要输入“cp2k test.inp \|tee test.out”就等价于输入“mpirun -np 8 cp2k.popt test.inp \|tee test.out”了，用起来方便多了。（这里后面的“\|tee test.out”指将终端上的输出信息保存在同目录下的“test.out”文件里，可以没有但个人建议加上。）**
