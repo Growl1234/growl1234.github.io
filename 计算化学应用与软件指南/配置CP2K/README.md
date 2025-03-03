@@ -10,7 +10,7 @@
 
 **【写在前面：强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。大部分以lib开头的库都包含在anaconda中，因此吐血建议在linux上安装anaconda并在安装时选择同意写入环境变量。】**
 
-切到源码文件夹下/tools/toolchain文件夹，里面有一个文件“install_cp2k_toolchain.sh”，这就是我们接下来要执行的文件。
+切到/home/uw/CP2K/src/cp2k-2025.1/tools/toolchain文件夹，里面有一个文件“install_cp2k_toolchain.sh”，这就是我们接下来要执行的文件。
 
 下面的指令会告诉你运行该脚本会涉及的库和程序，以及默认的配置选项：
 
@@ -50,9 +50,9 @@
 
 * 注意硬盘的空余空间应当足够。本人在上述命令执行完毕后，toolchain/build目录约占7GB，toolchain/install目录占约1.4GB。如果硬盘吃紧，建议toolchain运行成功后把这个build目录删掉，里面的文件之后用不着。
 
-* 如果toolchain运行过程中某个库编译失败，可以检查终端的显示信息，或者去toolchain/build目录下的那个库的目录中去找编译过程输出的log文件，在里面搜error，根据报错试图分析原因。toolchain运行失败后可以重新运行，**它会根据toolchain/build目录的内容做判断，之前已经下载和编译成功的库会自动跳过，而从失败的库继续编译。** 如果把build和install目录都删了，则toolchain会从头执行。
+* 如果toolchain运行过程中某个库编译失败，可以检查终端的显示信息，或者去toolchain/build目录下的那个库的目录中去找编译过程输出的log文件，在里面搜error，根据报错试图分析原因并解决问题。toolchain运行失败后可以重新运行，**它会根据toolchain/build目录的内容做判断，之前已经下载和编译成功的库会自动跳过，而从失败的库继续编译。** 如果把build和install目录都删了，则toolchain会从头执行。
 
-* 如果在安装某个库的过程中一直卡着，通过top命令发现CPU也没在编译库，或提示wget失败（failed to download）（这也是我自己遇到的问题），那么几乎一定是因为网速原因导致那些库的压缩包老也下载不完甚至下载不了（在大陆区域不可描述的访问国际互联网的条件下尤为常见）。可以去toochain/build目录下看看正在装的这个库的压缩包，如果尺寸特别小且增加得特别缓慢（对于失败情况存在文件但尺寸为0），说明就是这个问题所致。解决方法是开微屁恩加速访问国际互联网，然后自己点里面的链接访问网站下载好相应的包移动到toolchain/build目录中覆盖原来的傀儡文件。当然一个更好的办法是直接去[官网的这个链接](https://www.cp2k.org/static/downloads/)预先下载好CP2K编译过程中要用到的各种包放到toolchain/build目录下。
+* 如果在安装某个库的过程中提示wget失败（failed to download）（这也是我自己遇到的问题），那么几乎一定是因为网速原因导致那些库的压缩包下载不了（在大陆区域不可描述的访问国际互联网的条件下尤为常见）。去toochain/build目录下看正在装的这个库的压缩包，往往发现尺寸为0，说明就是这个问题所致。解决方法是开微屁恩加速访问国际互联网，然后自己点里面的链接访问网站下载好相应的包移动到toolchain/build目录中覆盖原来的傀儡文件。当然一个更好的办法是直接去[官网的这个链接](https://www.cp2k.org/static/downloads/)预先下载好CP2K编译过程中要用到的各种包放到toolchain/build目录下，这样压缩包被检测到，wget步骤就被自动跳过了。
 
 ### 3. 编译
 
@@ -69,7 +69,7 @@ make -j 6 ARCH=local VERSION="ssmp psmp"
 
 -j后面的数字是并行编译用的核数。第一个命令可以直接去相应路径source setup后，再退回编译目录执行第二个命令。
 
-注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo apt install zlib1g命令装上zlib库，再重新运行上面的make那行命令即可。若出现错误："找不到 -lsz"，则运行sudo apt install libsz2把szip库安装好，若仍未解决，请检查“libhdf5-openmpi-dev”是否正确安装，安装好后重新make。
+***注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo apt install zlib1g命令装上zlib库，再重新运行上面的make那行命令即可。若出现错误："找不到 -lsz"，则运行sudo apt install libsz2把szip库安装好，若仍未解决，请检查“libhdf5-openmpi-dev”是否正确安装，安装好后重新make。***
 
 编译出的可执行程序现在都产生在了/home/uw/CP2K/src/cp2k-2025.1/exe/local目录下，这里面cp2k.popt、cp2k.psmp、cp2k.sopt、cp2k.ssmp就是我们所需要的CP2K的可执行文件了（popt和sopt其实分别是psmp和ssmp的符号链接）。
 
