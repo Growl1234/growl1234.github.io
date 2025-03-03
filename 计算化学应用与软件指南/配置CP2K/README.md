@@ -40,7 +40,7 @@
 
 * --with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里需要加上--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
-* --with-openblas=system和--with-hdf5=system两项，默认是install，我已经装好了所以这里设置了system（虽然自己后来编译的时候发现还是需要安装libhdf5-openmpi-dev库）。
+* --with-openblas=system和--with-hdf5=system两项，默认是install，一般不要更改，我已经事先装好了所以这里设置了system（小多嘴一句，openblas我自己是安装的sudo apt库里面的libopenblas-dev，hdf5从官网下载源码编译安装的（参考我在VASP的OpenMPI配置教程里面的第二个链接），但后来编译的时候发现官网编译的hdf5程序包的lib调用不上导致不得不额外安装了libhdf5-openmpi-dev库）。
 
 * --with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
