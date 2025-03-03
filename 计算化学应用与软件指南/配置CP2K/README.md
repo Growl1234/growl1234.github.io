@@ -8,7 +8,7 @@
 
 ### 2. 通过源码的toochain脚本预安装需要的库
 
-**【写在前面：强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。大部分以lib开头的库都包含在anaconda中，因此吐血建议在linux上安装anaconda并在安装时选择同意写入环境变量。】**
+**【写在前面：强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。大部分以lib开头的库都包含在anaconda中，因此吐血建议在linux上安装anaconda并在安装时选择同意写入环境变量（虽然对于CP2K的配置不是必需）。】**
 
 切到/home/uw/CP2K/src/cp2k-2025.1/tools/toolchain文件夹，里面有一个文件“install_cp2k_toolchain.sh”，这就是我们接下来要执行的文件。
 
