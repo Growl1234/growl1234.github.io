@@ -12,7 +12,7 @@
 
 Vaspkit是一个很方便的用作VASP预-后处理的独立程序包，由国内师生开发，对初学者强烈推荐（尤其在另一优秀的同类程序包p4vasp早已停止开发且无法在现行版本中安装和使用的背景下）。
 
-如果需要配置vaspkit，只需从[SourceForge](https://sourceforge.net/projects/vaspkit/)上下载源码并按“how_to_install”文件的说明安装即可，非常简单。
+如果需要配置vaspkit，只需从[SourceForge](https://sourceforge.net/projects/vaspkit/)上下载源码并按“how_to_install”文件的说明或[官网说明](https://vaspkit.com/installation.html#id1)安装即可，非常简单。
 
 **注：一定要把主文件夹“.vaspkit”文件里面PBE、LDA等（具体看你自己安装的VASP带了说明赝势库）的路径改成自己计算机里面的实际路径；为方便调用，建议将安装目录的bin文件夹写入环境变量。**
 
