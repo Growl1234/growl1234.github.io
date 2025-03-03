@@ -1,14 +1,16 @@
 ## 从源代码配置CP2K
 
-**预先说明：下面代码中可能涉及到的一些路径都是以我本人的Ubuntu虚拟机上安放的路径为例，实际操作时千万不要忘记改成自己的！**
+**写在前面：**
+
+- **下面代码中可能涉及到的一些路径都是以我本人的Ubuntu虚拟机上安放的路径为例，实际操作时千万不要忘记改成自己的！**
+
+- **强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。大部分以lib开头的库都包含在anaconda中，因此吐血建议在linux上安装anaconda并在安装时选择同意写入环境变量（虽然对于CP2K的配置不是必需）。**
 
 ### 1. 下载CP2K源码
 
 从[官方GitHub项目页面](https://github.com/cp2k/cp2k/releases/)直接下载即可。请选择发行文件中的cp2k-X.Y.tar.bz2文件。
 
 ### 2. 通过源码的toochain脚本预安装需要的库
-
-**【写在前面：强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。大部分以lib开头的库都包含在anaconda中，因此吐血建议在linux上安装anaconda并在安装时选择同意写入环境变量（虽然对于CP2K的配置不是必需）。】**
 
 切到/home/uw/CP2K/src/cp2k-2025.1/tools/toolchain文件夹，里面有一个文件“install_cp2k_toolchain.sh”，这就是我们接下来要执行的文件。
 
@@ -38,7 +40,7 @@
 
 * 这里我没有--with-openmpi=install一项，因为我的电脑已经事先安装好了OpenMPI（默认选项是system）。如果你的电脑上没有安装任何MPI，请加上这一选项。**不要使用Intel OneAPI，目前这一MPI不受支持，虽然toolchain一步会成功但后续编译过程会导致系统崩溃（官网信息+亲身实践教训）。**
 
-* --with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里需要加上--with-cmake=system用当前系统里的cmake，能节约编译时间。
+* --with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
 * --with-openblas=system和--with-hdf5=system两项，默认是install，一般不要更改，我已经事先装好了所以这里设置了system（小多嘴一句，openblas我自己是安装的sudo apt库里面的libopenblas-dev，hdf5从官网下载源码编译安装的（参考我在VASP的OpenMPI配置教程里面的第二个链接），但后来编译的时候发现官网编译的hdf5程序包的lib调用不上导致不得不额外安装了libhdf5-openmpi-dev库）。
 
