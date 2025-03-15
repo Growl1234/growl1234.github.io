@@ -4,9 +4,9 @@
 
 **【写在前面：一定要检查自己的make、cmake、gcc、g++、gfortran等编译所需要的最基本的程序包有没有安装好，否则无法编译VASP。】**
 
-一般推荐使用Intel OneAPI。对于这种方法，网上有不少配置编译VASP的教程，相差不大。唯一需要注意的是可能需要根据你所安装的Intel OneAPI版本修改“makefile.include”里面的部分内容（以v2025.0为例，修改“icc”为“icx”，“icpc”为“icpx”，“mpiifort”为“mpiifx”），以及清空MKLROOT后面的示例路径（或在整行前加#）。
+一般推荐使用Intel OneAPI。对于这种方法，网上有不少配置编译VASP的教程，相差不大。唯一需要注意的是可能需要根据你所安装的Intel OneAPI版本修改“makefile.include”里面的部分内容（以v2025.0为例，修改“icc”为“icx”，“icpc”为“icpx”，“mpiifort”为“mpiifx”），以及清空MKLROOT后面的示例路径（或在整行前加#）来让编译文件读取系统默认的真实路径；另外建议将其中的OFLAG参数里加入-xhost，这样编译器会使得编译出的程序能够利用当前机子CPU能支持的最高档次的指令集以加速计算，可以省去一些不必要的麻烦。
 
-根据[官网的这个链接](https://www.vasp.at/wiki/index.php/Personal_computer_installation)，也可以使用OpenMPI在自己的个人计算机上进行编译，对于这种方法，操作要稍麻烦一些，因为需要额外安装一些相关的库。可以参考前面的官网指南或者[这里](https://implant.fs.cvut.cz/vasp-compilation/)的教程来配置编译VASP。
+根据[官网的这个链接](https://www.vasp.at/wiki/index.php/Personal_computer_installation)，也可以使用OpenMPI在自己的个人计算机上进行编译，对于这种方法，操作要稍麻烦一些，因为需要额外安装一些相关的库，额外进行一些“makefile.include”文件的编辑工作。可以参考前面的官网指南或者[这里](https://implant.fs.cvut.cz/vasp-compilation/)的教程来配置编译VASP。
 
 ### 配置vaspkit
 
