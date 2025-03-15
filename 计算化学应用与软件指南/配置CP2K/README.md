@@ -6,9 +6,9 @@
 
 - **强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。大部分以lib开头的库都包含在anaconda中，因此吐血建议在linux上安装anaconda并在安装时选择同意写入环境变量（虽然对于CP2K的配置不是必需）。**
 
-### 1. 下载CP2K源码
+### 1. 下载并解压CP2K源码
 
-从[官方GitHub项目页面](https://github.com/cp2k/cp2k/releases/)直接下载即可。请选择发行文件中的cp2k-X.Y.tar.bz2文件。
+从[官方GitHub项目页面](https://github.com/cp2k/cp2k/releases/)直接下载即可。请选择发行文件中的cp2k-X.Y.tar.bz2文件。下载好后，解压到自己计划放置CP2K源码程序的位置（我自己的是/home/uw/CP2K/src/cp2k-2025.1）
 
 ### 2. 通过源码的toochain脚本预安装需要的库
 
