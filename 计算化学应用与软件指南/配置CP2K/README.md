@@ -36,7 +36,7 @@
 
 下面给出一些说明，建议大家了解（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）：
 
-* --with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像Quantum ESPRESSO那样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用Quantum ESPRESSO了，其安装见[《Quantum ESPRESSO在Linux中的安装方法》](http://sobereva.com/562)。
+* --with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
 
 * 这里我没有--with-openmpi=install一项，因为我的电脑已经事先安装好了OpenMPI（默认选项是system）。如果你的电脑上没有安装任何MPI，请加上这一选项。**不要使用Intel OneAPI，目前这一MPI不受支持，虽然toolchain一步会成功但后续编译过程会导致系统崩溃（官网信息+亲身实践教训）。**
 
