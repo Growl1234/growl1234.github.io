@@ -31,7 +31,7 @@
 这是我自己的设置：
 
 ```shell
-./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-ifx=yes --with-cmake=system --with-openblas=system --with-hdf5=system -j 6
+./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-openblas=system --with-hdf5=system -j 6
 ```
 
 下面给出一些说明，建议大家了解（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）：
@@ -39,8 +39,6 @@
 * --with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
 
 * 这里我没有--with-openmpi=install一项，因为我的电脑已经事先安装好了OpenMPI（默认选项是system）。如果你的电脑上没有安装任何MPI，请加上这一选项。**不要使用Intel OneAPI，目前这一MPI不受支持，虽然toolchain一步会成功但后续编译过程会导致系统崩溃（官网信息+亲身实践教训）。**
-
-* --with-ifx一项默认是no，所以如果toolchain检测到Intel OneAPI默认找ifort，找不到就会报错。但是ifx也可以单独开启且与OpenMPI不矛盾，如果你的电脑是Intel处理器，可以打开这个代替gfortran，编译时会快一些。
 
 * --with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
