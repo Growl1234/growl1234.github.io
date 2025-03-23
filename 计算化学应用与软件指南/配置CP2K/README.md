@@ -48,7 +48,7 @@
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
-* 从CP2K 2024.2开始支持了DFT-D4色散校正，这种校正的常识见[《DFT-D4色散校正的简介与使用》](http://sobereva.com/464)。想用DFT-D4的话必须再额外带上--with-ninja --with-dftd4。
+* 从CP2K 2024.2开始支持了DFT-D4色散校正，这种校正的常识见[《DFT-D4色散校正的简介与使用》](http://sobereva.com/464)。想用DFT-D4的话必须再额外带上\--with-ninja \--with-dftd4。
 
 * toolchain默认用所有CPU核心并行编译，可以自行加上-j [并行核数]来明确指定用多少核（如我就用了-j 6，之所以不敢用-j 8是因为被卡闪退过）。编译的耗时和CPU核数关系很大，我本人编译了近两个小时（其中libint库的安装花了40分钟之久）。
 
