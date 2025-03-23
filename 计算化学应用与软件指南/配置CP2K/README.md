@@ -66,7 +66,7 @@
 
 ```shell
 source /home/uw/CP2K/src/cp2k-2025.1/tools/toolchain/install/setup
-make -j 6 ARCH=local VERSION="ssmp psmp"
+make -j 6 ARCH=local VERSION=psmp
 ```
 
 -j后面的数字是并行编译用的核数。第一个命令可以直接去相应路径source setup后，再退回编译目录执行第二个命令。
