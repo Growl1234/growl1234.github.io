@@ -31,7 +31,7 @@
 这是我自己的设置：
 
 ```shell
-./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-openblas=system --with-hdf5=system -j 6
+./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-ifx=yes --with-cmake=system --with-openblas=system --with-hdf5=system -j 6
 ```
 
 下面给出一些说明，建议大家了解（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）：
@@ -39,6 +39,8 @@
 * --with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
 
 * 这里我没有--with-openmpi=install一项，因为我的电脑已经事先安装好了OpenMPI（默认选项是system）。如果你的电脑上没有安装任何MPI，请加上这一选项。**不要使用Intel OneAPI，目前这一MPI不受支持，虽然toolchain一步会成功但后续编译过程会导致系统崩溃（官网信息+亲身实践教训）。**
+
+* --with-ifx一项默认是no，所以如果toolchain检测到Intel OneAPI默认找ifort，找不到就会报错。但是ifx也可以单独开启且与OpenMPI不矛盾，如果你的电脑是Intel处理器，可以打开这个代替gfortran，编译时会快一些。
 
 * --with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
@@ -54,7 +56,7 @@
 
 * 如果toolchain运行过程中某个库编译失败，可以检查终端的显示信息，或者去toolchain/build目录下的那个库的目录中去找编译过程输出的log文件，在里面搜error，根据报错试图分析原因并解决问题。toolchain运行失败后可以重新运行，**它会根据toolchain/build目录的内容做判断，之前已经下载和编译成功的库会自动跳过，而从失败的库继续编译。** 如果把build和install目录都删了，则toolchain会从头执行。
 
-* 如果在安装某个库的过程中提示wget失败（failed to download）（这也是我自己遇到的问题），那么几乎一定是因为网速原因导致那些库的压缩包下载不了（在大陆区域不可描述的访问国际互联网的条件下尤为常见）。去toochain/build目录下看正在装的这个库的压缩包，往往发现大小为0，说明就是这个问题所致。解决方法是挂梯子加速访问国际互联网，然后自己点里面的链接访问网站下载好相应的包移动到toolchain/build目录中覆盖原来的傀儡文件。当然一个更好的办法是直接去[官网的这个链接](https://www.cp2k.org/static/downloads/)预先下载好CP2K编译过程中要用到的各种包放到toolchain/build目录下（当然，同样需要梯子），这样压缩包被检测到，wget步骤就被自动跳过了。
+* 如果在安装某个库的过程中提示wget失败（failed to download）（这也是我自己遇到的问题），那么几乎一定是因为网速原因导致那些库的压缩包下载不了（在大陆区域不可描述的访问国际互联网的条件下尤为常见）。去toochain/build目录下看正在装的这个库的压缩包，往往发现大小为0，说明就是这个问题所致。解决方法是挂梯子加速访问国际互联网。当然一个更好的办法是直接去[官网的这个链接](https://www.cp2k.org/static/downloads/)预先下载好CP2K编译过程中要用到的各种包放到toolchain/build目录下（当然，同样需要梯子），这样压缩包被检测到，wget步骤就被自动跳过了。
 
 ### 3. 编译
 
