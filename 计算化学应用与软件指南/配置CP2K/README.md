@@ -73,7 +73,7 @@ make -j 6 ARCH=local VERSION=psmp
 
 -j后面的数字是并行编译用的核数。第一个命令可以直接去相应路径source setup后，再退回编译目录执行第二个命令。
 
-***注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo apt install zlib1g命令装上zlib库，再重新运行上面的make那行命令即可。若出现错误："找不到 -lsz"，则运行sudo apt install libsz2把szip库安装好，若仍未解决，请检查“libhdf5-openmpi-dev”是否正确安装，安装好后重新make。***
+***注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo apt install zlib1g命令装上zlib库，再重新运行上面的make那行命令即可。若出现错误："找不到 -lsz"，则运行sudo apt install libsz2把szip库安装好，若仍未解决，可能需要检查hdf5是否正确安装。***
 
 现在，编译出的可执行程序都产生在了/home/uw/CP2K/src/cp2k-2025.1/exe/local目录下，这里面cp2k.popt、cp2k.psmp、cp2k.sopt、cp2k.ssmp就是我们所需要的CP2K的可执行文件了（popt和sopt其实分别是psmp和ssmp的符号链接）。
 
