@@ -48,7 +48,7 @@
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
-* \--with-dftd4=system代表用自己装好的DFT-D4程序。Sobereva的文章里提到，“从CP2K 2024.2开始支持了DFT-D4色散校正，这种校正的常识见[《DFT-D4色散校正的简介与使用》](http://sobereva.com/464)。想用DFT-D4的话必须再额外带上\--with-ninja \--with-dftd4”。计算化学公社也有一个链接：[CP2K-2024.2 发布了](http://bbs.keinsci.com/thread-47650-1-1.html)，里面提及了装DFT-D4的注意事项和一些问题。个人建议按照dftd4官网上的说明自行用cmake编译dftd4（提前用sudo apt install ninja-build安装所需ninja；不要用预编译好的二进制软件包，里面只有最核心的可执行文件，但却缺少其他一些必要的东西），然后像我一样只加\--with-dftd4=system，这样可以避开用toolchain装遇到的各种各样、层出不穷的报错。
+* \--with-dftd4=system代表用自己装好的DFT-D4程序。Sobereva的文章里提到，“从CP2K 2024.2开始支持了DFT-D4色散校正，这种校正的常识见[《DFT-D4色散校正的简介与使用》](http://sobereva.com/464)。想用DFT-D4的话必须再额外带上\--with-ninja \--with-dftd4”。计算化学公社也有一个链接：[CP2K-2024.2 发布了](http://bbs.keinsci.com/thread-47650-1-1.html)，里面提及了装DFT-D4的注意事项和一些问题。这里一定要仔细阅读终端的报错信息和前面论坛，这里极有可能在toolchain安装阶段出现难以解决的报错。一个推荐的“偷懒”式解决方案，是把解压后的相同版本dftd4源码文件夹复制到/tools/toolchain/build目录下，然后注释掉../scripts/stage8/install_dftd4.sh中下载和解压的相应的命令行。
 
 * toolchain默认用所有CPU核心并行编译，可以自行加上-j [并行核数]来明确指定用多少核（如我就用了-j 6，之所以不敢用-j 8是因为被卡闪退过）。编译的耗时和CPU核数关系很大，我本人编译了近两个小时（其中libint库的安装花了40分钟之久）。
 
