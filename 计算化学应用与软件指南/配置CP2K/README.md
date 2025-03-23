@@ -42,7 +42,7 @@
 
 * --with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
-* --with-mkl指使用mkl数学库，设置此项会代替默认的--with-openblas=install项。
+* --with-mkl指使用Intel MKL数学库，设置此项会代替默认的--with-openblas=install项。其实这个一般不需要特别设置，因为如果toolchain脚本检测到了MKLROOT就会默认将Intel MKL作为首选。
 
 * --with-hdf5=system默认是install，一般不要更改，我已经事先装好了所以这里设置了system。
 
