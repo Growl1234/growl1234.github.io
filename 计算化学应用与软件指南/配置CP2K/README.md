@@ -31,7 +31,7 @@
 这是我自己的设置：
 
 ```shell
-./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-openblas=system --with-hdf5=system -j 6
+./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-mkl --with-hdf5=system -j 6
 ```
 
 下面给出一些说明，建议大家了解（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）：
@@ -42,7 +42,9 @@
 
 * --with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
-* --with-openblas=system和--with-hdf5=system两项，默认是install，一般不要更改，我已经事先装好了所以这里设置了system（小多嘴一句，openblas我自己是安装的sudo apt库里面的libopenblas-dev，hdf5从官网下载源码编译安装的（参考我在VASP的OpenMPI配置教程里面的第二个链接），但后来编译的时候发现官网编译的hdf5程序包的lib调用不上导致不得不额外安装了libhdf5-openmpi-dev库）。
+* --with-mkl指使用mkl数学库，设置此项会代替默认的--with-openblas=install项。
+
+* --with-hdf5=system默认是install，一般不要更改，我已经事先装好了所以这里设置了system。
 
 * --with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
