@@ -31,10 +31,12 @@
 这是我自己的设置：
 
 ```shell
-./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-hdf5=system --with-ninja=system --with-dftd4 -j 6
+./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-openblas=system --with-hdf5=system --with-ninja=system --with-dftd4 -j 6
 ```
 
 下面给出一些说明，建议大家了解（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）：
+
+* toolchain会自动检查系统中是否存在
 
 * \--with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
 
@@ -42,7 +44,7 @@
 
 * \--with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上\--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
-* \--with-hdf5=system默认是install，我已经事先装好了所以这里设置了system。
+* \--with-openblas=system和\--with-hdf5=system默认是install，我已经事先装好了所以这里设置了system。
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
