@@ -42,7 +42,7 @@
 
 * \--with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上\--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
-* \--with-openblas=system和\--with-hdf5=system默认是install，一般不要更改，我已经事先装好了所以这里设置了system。
+* \--with-hdf5=system默认是install，我已经事先装好了所以这里设置了system。
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
