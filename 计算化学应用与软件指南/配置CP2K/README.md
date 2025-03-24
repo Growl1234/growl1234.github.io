@@ -31,7 +31,7 @@
 这是我自己的设置：
 
 ```shell
-./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-openblas=system --with-hdf5=system --with ninja=system --with-dftd4 -j 6
+./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-hdf5=system --with ninja=system --with-dftd4 -j 6
 ```
 
 下面给出一些说明，建议大家了解（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）：
