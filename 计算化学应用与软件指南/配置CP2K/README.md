@@ -31,7 +31,7 @@
 这是我自己的设置：
 
 ```shell
-./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-mkl --with-hdf5=system --with-dftd4=system -j 6
+./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-openblas=system --with-hdf5=system --with ninja=system --with-dftd4 -j 6
 ```
 
 下面给出一些说明，建议大家了解（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）：
@@ -42,13 +42,11 @@
 
 * \--with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上\--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
-* \--with-mkl指使用Intel MKL数学库，设置此项会代替默认的\--with-openblas=install项。其实这个一般不需要特别设置，因为如果toolchain脚本检测到了MKLROOT就会默认将Intel MKL作为首选。
-
-* \--with-hdf5=system默认是install，一般不要更改，我已经事先装好了所以这里设置了system。
+* \--with-openblas=system和\--with-hdf5=system默认是install，一般不要更改，我已经事先装好了所以这里设置了system。
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
-* \--with-dftd4=system代表用自己装好的DFT-D4程序。Sobereva的文章里提到，“从CP2K 2024.2开始支持了DFT-D4色散校正，这种校正的常识见[《DFT-D4色散校正的简介与使用》](http://sobereva.com/464)。想用DFT-D4的话必须再额外带上\--with-ninja \--with-dftd4”。计算化学公社也有一个链接：[CP2K-2024.2 发布了](http://bbs.keinsci.com/thread-47650-1-1.html)，里面提及了装DFT-D4的注意事项和一些问题。这里一定要仔细阅读终端的报错信息和前面论坛，这里极有可能在toolchain安装阶段出现难以解决的报错。一个推荐的“偷懒”式解决方案，是把解压后的相同版本dftd4源码文件夹复制到/tools/toolchain/build目录下，然后注释掉../scripts/stage8/install_dftd4.sh中下载和解压的相应的命令行（43，44，48，49）。
+* \--with-dftd4代表安装DFT-D4程序。Sobereva的文章里提到，“从CP2K 2024.2开始支持了DFT-D4色散校正，这种校正的常识见[《DFT-D4色散校正的简介与使用》](http://sobereva.com/464)。想用DFT-D4的话必须再额外带上\--with-ninja \--with-dftd4”。计算化学公社也有一个链接：[CP2K-2024.2 发布了](http://bbs.keinsci.com/thread-47650-1-1.html)，里面提及了装DFT-D4的注意事项和一些问题。这里一定要仔细阅读终端的报错信息和前面论坛，这里极有可能在toolchain安装阶段出现难以解决的报错。一个推荐的“偷懒”式解决方案，是把解压后的相同版本dftd4源码文件夹复制到/tools/toolchain/build目录下，然后注释掉../scripts/stage8/install_dftd4.sh中下载和解压的相应的命令行（43，44，48，49）。
 
 * toolchain默认用所有CPU核心并行编译，可以自行加上-j [并行核数]来明确指定用多少核（如我就用了-j 6，之所以不敢用-j 8是因为被卡闪退过）。编译的耗时和CPU核数关系很大，我本人编译了近两个小时（其中libint库的安装花了40分钟之久）。
 
