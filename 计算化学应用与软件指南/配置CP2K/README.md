@@ -2,13 +2,15 @@
 
 **写在前面：**
 
-- **下面代码中可能涉及到的一些路径都是以我本人的Ubuntu虚拟机上安放的路径为例，实际操作时千万不要忘记改成自己的！**
+- **下面代码中可能涉及到的一些路径都是以我本人的Ubuntu系统上安放的路径为例，实际操作时千万不要忘记改成自己的！**
 
-- **强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。大部分以lib开头的库都包含在anaconda中，因此吐血建议在linux上安装anaconda并在安装时选择同意写入环境变量（虽然对于CP2K的配置不是必需）。**
+- **如果你使用的不是Ubuntu，而是Rocky Linux（对于计算化学运行通常更为推荐）等，无妨，对于这个教程，除涉及直接从apt包管理器安装的步骤换成yum或dnf等（属于Linux基本的操作常识，更何况下面的正式步骤也不怎么涉及），其他操作都是一样的。想在Windows系统上用，只能通过WSL子系统环境的Linux控制台来用，对于这种情况，我无法提供帮助（而且有什么理由不干脆装个VMware软件配置Linux虚拟机呢？）。**
+
+- **强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。大部分以lib开头的库都包含在anaconda中，因此非常推荐在Linux上安装anaconda并在安装时选择同意写入环境变量（虽然对于CP2K的配置不是必需）。**
 
 ### 1. 下载并解压CP2K源码
 
-从[官方GitHub项目页面](https://github.com/cp2k/cp2k/releases/)直接下载即可。请选择发行文件中的cp2k-X.Y.tar.bz2文件。下载好后，解压到自己计划放置CP2K源码程序的位置（我自己的是/home/uw/CP2K/src/cp2k-2025.1）
+从[官方GitHub项目页面](https://github.com/cp2k/cp2k/releases/)直接下载即可。请选择发行文件中的cp2k-X.Y.tar.bz2文件。下载好后，解压到自己计划放置CP2K源码程序的位置（我自己的是/home/uw/CP2K/src/cp2k-2025.1）。你也可以选择git clone方式下载实时开发版本，但安装途中出现错误的几率会增大。
 
 ### 2. 通过源码的toochain脚本预安装需要的库
 
@@ -31,30 +33,32 @@
 这是我自己的设置：
 
 ```shell
-./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-openblas=system --with-hdf5=system --with-ninja=system --with-dftd4 -j 6
+./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-hdf5=system --with-ninja=system --with-dftd4 -j 4
 ```
 
 下面给出一些说明，建议大家了解（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）：
 
-* toolchain会自动检查系统中是否存在
+* toolchain会自动检查系统中是否存在MPI、编译器等应有配置。如果没有检测到MPI，也没有设置MPI的install选项，toolchain会直接跳过MPI阶段和一些其他库（如Scalapack、COSMA、ELPA）的安装阶段而继续进行；有关MPI的具体注意事项下面有讲。如果没有检测到编译器，默认toolchain会自动安装gcc。
+
+* 关于数学库，toolchain也会先进行检查，如果没有检查到MKL（包括新的oneMKL，下同），一般默认安装OpenBLAS、Scalapack和fftw3等，此时如果你已经事先有安装它们（包括其中任意一个）且环境变量配置正确，最好写上例如\--with-openblas=system这样的选项；如果检查到MKL，则Scalapack和fftw3等的安装将被跳过。**注意：无论OpenBLAS是否需要作为数学库安装，也无论其是否被标为“system”，其源码都会被下载并解压用以执行另外一个必要的检查步骤，而关于OpenBLAS的一切直接或间接设定只能影响其会不会被编译和安装。**
 
 * \--with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
 
-* 这里我没有\--with-openmpi=install一项，因为我的电脑已经事先安装好了OpenMPI（默认选项是system）。如果你的电脑上没有安装任何MPI，请加上这一选项。**不要使用Intel OneAPI，目前这一MPI不受支持，虽然toolchain一步会成功但后续编译过程会导致系统崩溃（官网信息+亲身实践教训）。**
+* 关于MPI一项，唯一需要注意的是，**不要使用Intel oneAPI，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），故虽然toolchain一步会成功但后续编译过程会导致系统内存爆浆而自动将进程杀掉（亲身实践教训）。** 另外，根据自己有限的测试经验，MPI和数学库（MKL或OpenBLAS+Scalapack）之间的搭配关系也可能对CP2K产生影响（直接体现可能不在编译步骤而是在运行计算时莫名其妙报错），个人推荐OpenMPI和OpenBLAS+Scalapack搭配组合，MPICH和Intel oneMKL搭配组合。未对Intel的经典老版本MPI和MKL做任何测试。如果想直接通过toolchain安装MPI，个人建议优先考虑OpenMPI。
 
 * \--with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上\--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
-* \--with-openblas=system和\--with-hdf5=system默认是install，我已经事先装好了所以这里设置了system。
+* \--with-hdf5=system默认是install，我已经事先装好了所以这里设置了system。
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
-* \--with-dftd4代表安装DFT-D4程序。Sobereva的文章里提到，“从CP2K 2024.2开始支持了DFT-D4色散校正，这种校正的常识见[《DFT-D4色散校正的简介与使用》](http://sobereva.com/464)。想用DFT-D4的话必须再额外带上\--with-ninja \--with-dftd4”。计算化学公社也有一个链接：[CP2K-2024.2 发布了](http://bbs.keinsci.com/thread-47650-1-1.html)，里面提及了装DFT-D4的注意事项和一些问题。这里一定要仔细阅读终端的报错信息和前面论坛，这里极有可能在toolchain安装阶段出现难以解决的报错。一个推荐的“偷懒”式解决方案，是把解压后的相同版本dftd4源码文件夹复制到/tools/toolchain/build目录下，然后注释掉../scripts/stage8/install_dftd4.sh中下载和解压的相应的命令行（43，44，48，49）。
+* \--with-dftd4代表安装DFT-D4程序。Sobereva的文章里提到，“从CP2K 2024.2开始支持了DFT-D4色散校正，这种校正的常识见[《DFT-D4色散校正的简介与使用》](http://sobereva.com/464)。想用DFT-D4的话必须再额外带上\--with-ninja \--with-dftd4”。计算化学公社也有一个链接：[CP2K-2024.2 发布了](http://bbs.keinsci.com/thread-47650-1-1.html)，里面提及了装DFT-D4的注意事项和一些问题。这里一定要仔细阅读终端的报错信息和前面论坛，这里极有可能在toolchain安装阶段或后续阶段出现的报错，而且根据报错信息和对解压后源码文件夹的检查我怀疑CP2K官网库给的DFT-D4源码包不完整，基于此判断，如果遇到与DFT-D4相关模块有关的报错，一个推荐的解决方案是把相同版本dftd4源码包复制到/tools/toolchain/build目录下。
 
-* toolchain默认用所有CPU核心并行编译，可以自行加上-j [并行核数]来明确指定用多少核（如我就用了-j 6，之所以不敢用-j 8是因为被卡闪退过）。编译的耗时和CPU核数关系很大，我本人编译了近两个小时（其中libint库的安装花了40分钟之久）。
+* toolchain默认用所有CPU核心并行编译，可以自行加上-j [并行核数]来明确指定用多少核。编译的耗时和CPU核数关系很大，我本人编译了近两个小时（其中libint库的安装花了40多分钟之久）。
 
 * 注意硬盘的空余空间应当足够。本人在上述命令执行完毕后，toolchain/build目录约占7GB，toolchain/install目录占约1.4GB。如果硬盘吃紧，建议toolchain运行成功后把这个build目录删掉，里面的文件之后用不着。
 
-* 如果toolchain运行过程中某个库编译失败，可以检查终端的显示信息，或者去toolchain/build目录下的那个库的目录中去找编译过程输出的log文件，在里面搜error，根据报错试图分析原因并解决问题。toolchain运行失败后可以重新运行，**它会根据toolchain/build目录的内容做判断，之前已经下载和编译成功的库会自动跳过，而从失败的库继续编译。** 如果把build和install目录都删了，则toolchain会从头执行。
+* 如果toolchain运行过程中某个库编译失败，可以检查终端的显示信息，或者去toolchain/build目录下的那个库的目录中去找编译过程输出的log文件，在里面搜error，根据报错试图分析原因并解决问题。toolchain运行失败后可以重新运行，**它会根据toolchain/build目录的内容做判断，之前已经下载和编译成功的库会自动跳过，而从失败的库继续编译。** 如果把build和install目录都删了，则toolchain会从头执行，因此千万不要toolchain一有报错就随意删东西。
 
 * 如果在安装某个库的过程中提示wget失败（failed to download）（这也是我自己遇到的问题），那么几乎一定是因为网速原因导致那些库的压缩包下载不了（在大陆区域不可描述的访问国际互联网的条件下尤为常见）。去toochain/build目录下看正在装的这个库的压缩包，往往发现大小为0，说明就是这个问题所致。解决方法是挂梯子加速访问国际互联网。当然一个更好的办法是直接去[官网的这个链接](https://www.cp2k.org/static/downloads/)预先下载好CP2K编译过程中要用到的各种包放到toolchain/build目录下（当然，同样需要梯子），这样压缩包被检测到，wget步骤就被自动跳过了。
 
@@ -68,14 +72,14 @@
 
 ```shell
 source /home/uw/CP2K/src/cp2k-2025.1/tools/toolchain/install/setup
-make -j 6 ARCH=local VERSION="ssmp psmp"
+make -j 4 ARCH=local VERSION="ssmp psmp"
 ```
 
--j后面的数字是并行编译用的核数。第一个命令可以直接去相应路径source setup后，再退回编译目录执行第二个命令。
+-j后面的数字是并行编译用的进程数（核数）。第一个命令可以直接去相应路径source setup后，再退回编译目录执行第二个命令。
 
 ***注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo apt install zlib1g命令装上zlib库，再重新运行上面的make那行命令即可。若出现错误："找不到 -lsz"，则运行sudo apt install libsz2把szip库安装好，若仍未解决，可能需要检查hdf5是否正确安装。***
 
-现在，编译出的可执行程序都产生在了/home/uw/CP2K/src/cp2k-2025.1/exe/local目录下，这里面cp2k.popt、cp2k.psmp、cp2k.sopt、cp2k.ssmp就是我们所需要的CP2K的可执行文件了（popt和sopt其实分别是psmp和ssmp的符号链接）。
+现在，编译出的可执行程序都产生在了/home/uw/CP2K/src/cp2k-2025.1/exe/local目录下，这里面cp2k.popt、cp2k.psmp、cp2k.sopt、cp2k.ssmp就是我们所需要的CP2K的可执行文件了（popt和sopt在形式上分别是psmp和ssmp的符号链接，但psmp和ssmp支持OpenMP共享内存方式并行而popt和sopt不能）。
 
 随后，在主文件夹的.bashrc中添加如下两行：
 
@@ -98,4 +102,4 @@ source ~/.bashrc
 
 Sobereva提供了一个小的测试性输入文件，可以自己去网站下载。也可以自己用一些简单任务的输入文件做测试。测试成功，说明安装的CP2K没有问题，恭喜你，可以放心开始使用了。
 
-**注：（来自sobereva）如果你是自己编译的CP2K，建议默认用popt版而不要用ssmp版，因为在某些情况下后者运行效率远不及popt版（但也有些任务二者速度差异不大，看具体情况）。为了运行popt版省事，建议在~/.bashrc里面加入一行alias cp2k='mpirun -np 8 cp2k.popt'。重新进入终端后，只要输入“cp2k test.inp \|tee test.out”就等价于输入“mpirun -np 8 cp2k.popt test.inp \|tee test.out”了，用起来方便多了。（这里后面的“\|tee test.out”指将终端上的输出信息保存在同目录下的“test.out”文件里，可以没有但个人建议加上。）**
+**注：（来自sobereva）如果你是自己编译的CP2K，建议默认用popt版而不要用ssmp版，因为在某些情况下后者运行效率远不及popt版（但也有些任务二者速度差异不大，看具体情况）。为了运行popt版省事，可以在~/.bashrc里面加入一行alias cp2k='mpirun -np 4 cp2k.popt'。重新进入终端后，只要输入“cp2k test.inp \|tee test.out”就等价于输入“mpirun -np 4 cp2k.popt test.inp \|tee test.out”了，用起来方便多了。（这里后面的“\|tee test.out”指在终端上输出信息的同时保存在同目录下的“test.out”文件里，可以没有但个人建议加上。）**
