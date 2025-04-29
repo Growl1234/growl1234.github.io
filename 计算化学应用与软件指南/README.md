@@ -34,8 +34,6 @@ ___
 
 [VASP Manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual)
 
-[调整堆栈限制](/计算化学应用与软件指南/调整堆栈限制/) **（Linux系统通用，不局限于VASP）**
-
 ### 适用于CP2K
 
 ___
