@@ -44,7 +44,7 @@
 
 * \--with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
 
-* 关于MPI一项，唯一需要注意的是，**不要使用Intel oneAPI，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），故虽然toolchain一步会成功但后续编译过程会导致系统内存爆浆而自动将进程杀掉（亲身实践教训）。** 另外，根据自己有限的测试经验，MPI和数学库（MKL或OpenBLAS+Scalapack）之间的搭配关系也可能对CP2K产生影响（直接体现可能不在编译步骤而是在运行计算时莫名其妙报错），个人推荐OpenMPI和OpenBLAS+Scalapack搭配组合，MPICH和Intel oneMKL搭配组合。未对Intel的经典老版本MPI和MKL做任何测试。如果想直接通过toolchain安装MPI，个人建议优先考虑OpenMPI。
+* 关于MPI一项，唯一需要注意的是，**不要使用Intel oneAPI，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），故虽然toolchain一步会成功但后续编译过程会导致系统内存爆浆而自动将进程杀掉（亲身实践教训）。** 另外，根据自己有限的测试经验，MPI和数学库（MKL或OpenBLAS+Scalapack）之间的搭配关系也可能对CP2K产生影响（直接体现可能不在编译步骤而是在运行计算时莫名其妙报错），个人推荐OpenMPI和OpenBLAS+Scalapack搭配组合，MPICH和Intel oneMKL（作为oneAPI BaseTookit的组件安装并单另制定环境变量设置，未测试单独安装oneMKL的情况）搭配组合。未对Intel的经典老版本MPI和MKL做任何测试。如果想直接通过toolchain安装MPI，个人建议优先考虑OpenMPI。
 
 * \--with-cmake一项默认是install，因为toolchain默认自动下载和编译cmake。前面我已经建议大家装上cmake，所以这里加上\--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
@@ -56,7 +56,7 @@
 
 * toolchain默认用所有CPU核心并行编译，可以自行加上-j [并行核数]来明确指定用多少核。编译的耗时和CPU核数关系很大，我本人编译了近两个小时（其中libint库的安装花了40多分钟之久）。
 
-* 注意硬盘的空余空间应当足够。本人在上述命令执行完毕后，toolchain/build目录约占7GB，toolchain/install目录占约1.4GB。如果硬盘吃紧，建议toolchain运行成功后把这个build目录删掉，里面的文件之后用不着。
+* 注意硬盘的空余空间应当足够。本人在上述命令执行完毕后，toolchain/build目录约占7GB，toolchain/install目录占约1.4GB。如果硬盘吃紧，建议toolchain运行成功后把这个build目录删掉，里面的文件之后用不着。（install目录千万别删！）
 
 * 如果toolchain运行过程中某个库编译失败，可以检查终端的显示信息，或者去toolchain/build目录下的那个库的目录中去找编译过程输出的log文件，在里面搜error，根据报错试图分析原因并解决问题。toolchain运行失败后可以重新运行，**它会根据toolchain/build目录的内容做判断，之前已经下载和编译成功的库会自动跳过，而从失败的库继续编译。** 如果把build和install目录都删了，则toolchain会从头执行，因此千万不要toolchain一有报错就随意删东西。
 
