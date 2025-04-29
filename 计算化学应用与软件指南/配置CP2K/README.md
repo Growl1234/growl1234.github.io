@@ -36,7 +36,7 @@
 ./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-hdf5=system --with-ninja=system --with-dftd4 -j 4
 ```
 
-下面给出一些说明，建议大家了解（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）：
+下面给出一些说明，建议大家了解（部分内容搬运自sobereva的文章，部分内容是我根据自己的情况改写/补充的）：
 
 * toolchain会自动检查系统中是否存在MPI、编译器等应有配置。如果没有检测到MPI，也没有设置MPI的install选项，toolchain会直接跳过MPI阶段和一些其他库（如Scalapack、COSMA、ELPA）的安装阶段而继续进行；有关MPI的具体注意事项下面有讲。如果没有检测到编译器，默认toolchain会自动安装gcc。
 
@@ -64,7 +64,7 @@
 
 ### 3. 编译
 
-（大部分内容搬运自sobereva的文章，我自己根据自己的情况改写/补充了点内容）
+（大部分内容搬运自sobereva的文章，我根据自己的情况改写/补充了点内容）
 
 接着上一节，现在把/home/uw/CP2K/src/cp2k-2025.1/tools/toolchain/install/arch目录下所有文件拷到/home/uw/CP2K/src/cp2k-2025.1/arch目录下。这些文件定义了编译不同版本的CP2K所需的参数，其内容是toolchain脚本根据装的库和当前环境自动产生的。
 
