@@ -18,6 +18,12 @@ ___
 
 [Gaussian 量子化学计算手册（ExpChem第二版中文节译本）](/计算化学应用与软件指南/Gaussian 量子化学计算手册（ExpChem第二版中文节译本）.pdf)
 
+### 适用于ORCA
+
+___
+
+[ORCA在线手册](https://www.faccts.de/docs/orca/6.0/manual/index.html)
+
 ### 适用于VASP
 
 ___
@@ -37,6 +43,12 @@ ___
 [从源代码配置CP2K](/计算化学应用与软件指南/配置CP2K/)
 
 [卢天（Sobereva）：驳网上流传的对CP2K缺点的不实描述](http://sobereva.com/729)
+
+### 个人使用过的不同计算程序对比
+
+___
+
+（待完善）
 
 ### 推荐论坛
 
