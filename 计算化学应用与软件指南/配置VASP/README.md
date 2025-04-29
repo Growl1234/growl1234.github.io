@@ -4,9 +4,13 @@
 
 **【写在前面：一定要检查自己的make、cmake、gcc、g++、gfortran等编译所需要的最基本的程序包有没有安装好，否则无法编译VASP。】**
 
-一般推荐使用Intel OneAPI。对于这种方法，网上有不少配置编译VASP的教程，相差不大。唯一需要注意的是可能需要根据你所安装的Intel OneAPI版本修改“makefile.include”里面的部分内容（以v2025.0为例，修改“icc”为“icx”，“icpc”为“icpx”，“mpiifort”为“mpiifx”），以及清空MKLROOT后面的示例路径（或在整行前加#）来让编译文件读取系统默认的真实路径；另外建议将其中的OFLAG参数里加入-xhost，这样编译器会使得编译出的程序能够利用当前机子CPU能支持的最高档次的指令集以加速计算，可以省去一些不必要的麻烦。
+编译的简要步骤为：将arch文件夹里你希望选择的makefile.include选项的文件复制到软件包主目录下并去掉注释性后缀（即更名为makefile.include），然后仔细检查里面的各种参数（必要时修改），最后执行“make DEPS=1 -jN all”即可（N指编译所用核数）。
 
-根据[官网的这个链接](https://www.vasp.at/wiki/index.php/Personal_computer_installation)，也可以使用OpenMPI在自己的个人计算机上进行编译，对于这种方法，操作要稍麻烦一些，因为需要额外安装一些相关的库，额外进行一些“makefile.include”文件的编辑工作。可以参考前面的官网指南或者[这里](https://implant.fs.cvut.cz/vasp-compilation/)的教程来配置编译VASP。
+一般推荐使用Intel oneAPI。对于这种方法，网上有不少配置编译VASP的教程，相差不大。唯一需要注意的是可能需要根据你所安装的Intel OneAPI版本修改“makefile.include”里面的部分内容（以v2025.0为例，修改“icc”为“icx”，“icpc”为“icpx”，“mpiifort”为“mpiifx”），以及清空MKLROOT后面的示例路径（或在整行前加#）来让编译文件读取系统默认的真实路径。另外，建议将其中的OFLAG参数里加入-xhost，这样编译器会使得编译出的程序能够利用当前机子CPU能支持的最高档次的指令集以加速计算，可以省去一些不必要的麻烦；但是注意这一选项仅严格适用于搭载Intel处理器的机子，搭载AMD处理器的机子不能使用这一选项也无法运行使用这一选项在搭载Intel处理器的机子上编译成功的程序，此时只能手动查看计算机支持的指令集并指定其最高指令集（如-mavx2即指定使用avx2指令集）以代替文件中的-xhost。
+
+根据[官网的这个链接](https://www.vasp.at/wiki/index.php/Personal_computer_installation)，也可以使用OpenMPI进行编译，对于这种方法，操作要稍麻烦一些，因为需要额外安装一些相关的库，额外进行一些“makefile.include”文件的编辑工作。对于这类情况，可以参考前面的官网指南或者[这里](https://implant.fs.cvut.cz/vasp-compilation/)的教程来配置编译VASP。
+
+VASP开发者强烈建议加上HDF5的支持，此时需要注意使用的HDF5的编译环境，应与VASP的编译环境相同（即使用相同的编译器，需要在预配置HDF5时手动指定）。
 
 ### 配置vaspkit
 
@@ -24,7 +28,7 @@ Vaspkit是一个很方便的用作VASP预-后处理的独立程序包，由国�
 
 2. 仔细阅读并按照[VTST官网的配置说明](https://theory.cm.utexas.edu/vtsttools/installation.html)进行必要的文件修改和覆盖操作（为以防万一，建议提前备份好原有src目录下的文件）。
 
-3. 回到编译时的目录，输入指令“make veryclean”清除之前的编译，然后“make”或“make all”（取决于你之前的编译指令选择）重新编译。
+3. 回到编译时的目录，输入指令“make veryclean”清除之前的编译，然后重新编译。
 
 **注：**
 
