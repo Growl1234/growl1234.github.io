@@ -38,19 +38,19 @@
 
 下面给出一些说明，建议大家了解（部分内容搬运自sobereva的文章，部分内容是我根据自己的情况改写/补充的）：
 
-* toolchain会自动检查系统中是否存在MPI、编译器等应有配置。如果没有检测到MPI，也没有设置MPI的install选项，toolchain会直接跳过MPI阶段和一些其他库（如Scalapack、COSMA、ELPA）的安装阶段而继续进行；有关MPI的具体注意事项下面有讲。如果没有检测到编译器，默认toolchain会自动安装gcc。
+* toolchain会自动检查系统中是否存在MPI、编译器等应有配置。如果没有检测到MPI，也没有设置MPI的install选项，toolchain会直接跳过MPI阶段和一些其他库（如Scalapack、COSMA、ELPA）的安装阶段而继续进行。如果没有检测到编译器，默认toolchain会自动安装gcc。
 
-* 关于数学库，toolchain也会先进行检查，如果没有检查到MKL（包括新的oneMKL，下同），一般默认安装OpenBLAS、Scalapack和fftw3等，此时如果你已经事先有安装它们（包括其中任意一个）且环境变量配置正确，最好写上例如\--with-openblas=system这样的选项；如果检查到MKL，则Scalapack和fftw3等的安装将被跳过。**注意：无论OpenBLAS是否需要作为数学库安装，也无论其是否被标为“system”，其源码都会被下载并解压用以执行另外一个必要的检查步骤，而关于OpenBLAS的一切直接或间接设定只能影响其会不会被编译和安装。**
+* toolchain也会自动检查系统是否存在MKL配置，如果没有检测到MKL（包括新的oneMKL，下同），一般默认安装OpenBLAS、Scalapack和fftw3等，此时如果你已经事先有安装它们（包括其中任意一个）且环境变量配置正确，最好写上例如\--with-openblas=system这样的选项；如果检查到MKL，则Scalapack和fftw3等的安装将被跳过。**注意：无论OpenBLAS是否需要作为数学库安装，也无论其是否被标为“system”，其源码都会被下载并解压用以执行另外一个必要的检查步骤，而关于OpenBLAS的一切直接或间接设定只能影响其会不会被编译和安装。**
 
-* \--with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
-
-* 关于MPI一项，唯一需要注意的是，**不要使用Intel oneAPI，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），故虽然toolchain一步会成功但后续编译过程会导致系统内存爆浆而自动将进程杀掉（亲身实践教训）。** 另外，根据自己有限的测试经验，MPI和数学库（MKL或OpenBLAS+Scalapack）之间的搭配关系也可能对CP2K产生影响（直接体现可能不在编译步骤而是在运行计算时莫名其妙报错），个人推荐OpenMPI和OpenBLAS+Scalapack搭配组合，MPICH和Intel oneMKL（作为oneAPI BaseTookit的组件安装并单另制定环境变量设置，未测试单独安装oneMKL的情况）搭配组合。未对Intel的经典老版本MPI和MKL做任何测试。如果想直接通过toolchain安装MPI，个人建议优先考虑OpenMPI。
+* **不要使用Intel oneAPI做并行化编译器，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），** 虽然toolchain一步可能会成功但后续编译步骤会出现内存爆浆问题而中断（亲身实践教训）。与oneAPI的并行编译器不同，**新的Intel oneMKL是受支持的**，但不要忘记在安装好oneMKL后进入fftw3xf目录（我的是/opt/intel/oneapi/mkl/2025.1/share/mkl/interfaces/fftw3xf）手动编译产生fftw3库文件（在该目录运行“make libintel64”；根据Makefile的设定，编译过程使用icx和gcc都可以，然而实际启动编译时如果没有检测到icx就跳过gcc检查直接报错，所以如果想用gcc必须显示指定“CC=gcc”）。
 
 * \--with-cmake一项默认是install，即无论系统是否装有cmake，只要没有显式指定\--with-cmake=system，toolchain都将默认自动下载和编译cmake（其他默认install的程序和库同理）。前面我已经建议大家装上cmake，所以这里加上\--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
-* \--with-dftd4代表安装DFT-D4程序。Sobereva的文章里提到，“从CP2K 2024.2开始支持了DFT-D4色散校正，这种校正的常识见[《DFT-D4色散校正的简介与使用》](http://sobereva.com/464)。想用DFT-D4的话必须再额外带上\--with-ninja \--with-dftd4”。计算化学公社也有一个链接：[CP2K-2024.2 发布了](http://bbs.keinsci.com/thread-47650-1-1.html)，里面提及了装DFT-D4的注意事项和一些问题。这里一定要仔细阅读终端的报错信息和前面论坛，这里极有可能在toolchain安装阶段或后续阶段出现的报错，而且根据报错信息和对解压后源码文件夹的检查我怀疑CP2K官网库给的DFT-D4源码包不完整，基于此判断，如果遇到与DFT-D4相关模块有关的报错，一个推荐的解决方案是把相同版本dftd4源码包复制到/tools/toolchain/build目录下。
+* \--with-dftd4代表安装DFT-D4程序，要加这个必须同时加上\--with-ninja。CP2K官网库给的DFT-D4源码包不完整，我建议去GitHub上DFT-D4官方仓库的发行页把相同版本dftd4源码包（.tar.xz）下载、解压并重新压缩为tar.gz格式，复制到/tools/toolchain/build目录下，让toolchain直接读取和安装，绕过从官网链接下载。
+
+* \--with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
 
 * toolchain默认用所有CPU核心并行编译，可以自行加上-j [并行核数]来明确指定用多少核。编译的耗时和CPU核数关系很大，我本人编译了近两个小时（其中libint库的安装花了40多分钟之久）。
 
@@ -58,7 +58,7 @@
 
 * 如果toolchain运行过程中某个库编译失败，可以检查终端的显示信息，或者去toolchain/build目录下的那个库的目录中去找编译过程输出的log文件，在里面搜error，根据报错试图分析原因并解决问题。toolchain运行失败后可以重新运行，**它会根据toolchain/build目录的内容做判断，之前已经下载和编译成功的库会自动跳过，而从失败的库继续编译。** 如果把build和install目录都删了，则toolchain会从头执行，因此千万不要toolchain一有报错就随意删东西。
 
-* 如果在安装某个库的过程中提示wget失败（failed to download）（这也是我自己遇到的问题），那么几乎一定是因为网速原因导致那些库的压缩包下载不了（在大陆区域不可描述的访问国际互联网的条件下尤为常见）。去toochain/build目录下看正在装的这个库的压缩包，往往发现大小很小且增速极为缓慢（甚至有大小为0的情况），说明就是这个问题所致。解决方法不言而喻。如果懒得去查Linux终端如何实现那个东西，干脆问已经安装好CP2K且没删build目录的人要CP2K编译过程中要用到的各种包放到toolchain/build目录下，这样压缩包被检测到，wget步骤就被自动跳过了。
+* 如果在安装某个库的过程中提示wget失败（failed to download）（这也是我自己遇到的问题），那么几乎一定是因为网速原因导致那些库的压缩包下载不了（在大陆区域不可描述的访问国际互联网的条件下尤为常见）。去toochain/build目录下看正在装的这个库的压缩包，往往发现大小很小且增速极为缓慢（甚至有大小为0的情况），说明就是这个问题所致。解决方法不言而喻。如果懒得去查Linux终端如何实现那个东西，那就到[官网的这个链接](https://www.cp2k.org/static/downloads/)逐一下载正确版本的所需库文件（需要对照script目录下的安装脚本），或者干脆问已经安装好CP2K且没删build目录的人要CP2K编译过程中要用到的各种包放到toolchain/build目录下，这样压缩包被检测到，wget步骤就被自动跳过了。
 
 ### 3. 编译
 
