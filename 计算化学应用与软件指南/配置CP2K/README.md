@@ -48,7 +48,7 @@
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
-* \--with-dftd4代表安装DFT-D4程序，要加这个必须同时加上\--with-ninja。CP2K官网库给的DFT-D4源码包不完整，我建议去GitHub上DFT-D4官方仓库的发行页把相同版本dftd4源码包（.tar.xz）下载、解压并重新压缩为tar.gz格式，复制到/tools/toolchain/build目录下，让toolchain直接读取和安装，绕过从官网链接下载。
+* \--with-dftd4代表安装DFT-D4程序，要加这个必须同时加上\--with-ninja。CP2K官网库给的DFT-D4源码包不完整，我建议去GitHub上DFT-D4官方仓库的发行页把相同版本dftd4源码包（.tar.xz）下载、解压并重新压缩为tar.gz格式，复制到/tools/toolchain/build目录下，让toolchain直接读取和安装，绕过从官网链接下载，能够避免一些莫名其妙的报错。
 
 * \--with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
 
