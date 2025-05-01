@@ -33,7 +33,7 @@
 这是我自己的设置：
 
 ```shell
-./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-hdf5=system --with-ninja=system --with-dftd4 -j 4
+./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-hdf5 --with-ninja=system --with-dftd4 -j 4
 ```
 
 下面给出一些说明，建议大家了解（部分内容搬运自sobereva的文章，部分内容是我根据自己的情况改写/补充的）：
@@ -47,8 +47,6 @@
 * 关于MPI一项，唯一需要注意的是，**不要使用Intel oneAPI，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），故虽然toolchain一步会成功但后续编译过程会导致系统内存爆浆而自动将进程杀掉（亲身实践教训）。** 另外，根据自己有限的测试经验，MPI和数学库（MKL或OpenBLAS+Scalapack）之间的搭配关系也可能对CP2K产生影响（直接体现可能不在编译步骤而是在运行计算时莫名其妙报错），个人推荐OpenMPI和OpenBLAS+Scalapack搭配组合，MPICH和Intel oneMKL（作为oneAPI BaseTookit的组件安装并单另制定环境变量设置，未测试单独安装oneMKL的情况）搭配组合。未对Intel的经典老版本MPI和MKL做任何测试。如果想直接通过toolchain安装MPI，个人建议优先考虑OpenMPI。
 
 * \--with-cmake一项默认是install，即无论系统是否装有cmake，只要没有显式指定\--with-cmake=system，toolchain都将默认自动下载和编译cmake（其他默认install的程序和库同理）。前面我已经建议大家装上cmake，所以这里加上\--with-cmake=system用当前系统里的cmake，能节约编译时间。
-
-* \--with-hdf5=system默认是install，我已经事先装好了所以这里设置了system。
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
@@ -77,7 +75,7 @@ make -j 4 ARCH=local VERSION="ssmp psmp"
 
 -j后面的数字是并行编译用的进程数（核数）。第一个命令可以直接去相应路径source setup后，再退回编译目录执行第二个命令。
 
-***注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo apt install zlib1g命令装上zlib库，再重新运行上面的make那行命令即可。若出现错误："找不到 -lsz"，则运行sudo apt install libsz2把szip库安装好，若仍未解决，可能需要检查hdf5是否正确安装。***
+***注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo apt install zlib1g命令装上zlib库，再重新运行上面的make那行命令即可。***
 
 现在，编译出的可执行程序都产生在了/home/uw/CP2K/src/cp2k-2025.1/exe/local目录下，这里面cp2k.popt、cp2k.psmp、cp2k.sopt、cp2k.ssmp就是我们所需要的CP2K的可执行文件了（popt和sopt在形式上分别是psmp和ssmp的符号链接，但psmp和ssmp支持OpenMP共享内存方式并行而popt和sopt不能）。
 
