@@ -33,7 +33,7 @@
 这是我自己的设置：
 
 ```shell
-./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-hdf5 --with-ninja=system --with-dftd4 -j 4
+./install_cp2k_toolchain.sh --with-sirius=no --with-plumed=install --with-cmake=system --with-hdf5=system --with-ninja=system --with-dftd4 -j 4
 ```
 
 下面给出一些说明，建议大家了解（部分内容搬运自sobereva的文章，部分内容是我根据自己的情况改写/补充的）：
