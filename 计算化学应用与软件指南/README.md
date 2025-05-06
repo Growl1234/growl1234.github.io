@@ -18,6 +18,8 @@ ___
 
 [Gaussian 量子化学计算手册（ExpChem第二版中文节译本）](/计算化学应用与软件指南/Gaussian 量子化学计算手册（ExpChem第二版中文节译本）.pdf)
 
+[向Slurm集群提交Gaussian任务的两个注意事项](/计算化学应用与软件指南/Gaussian_slurm)
+
 ### 适用于ORCA
 
 ___
