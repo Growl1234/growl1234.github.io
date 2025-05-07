@@ -42,7 +42,9 @@
 
 * toolchain也会自动检查系统是否存在MKL配置，如果没有检测到MKL（包括新的oneMKL，下同），一般默认安装OpenBLAS、Scalapack和fftw3等，此时如果你已经事先有安装它们（包括其中任意一个）且环境变量配置正确，最好写上例如\--with-openblas=system这样的选项；如果检查到MKL，则Scalapack和fftw3等的安装将被跳过。**注意：无论OpenBLAS是否需要作为数学库安装，也无论其是否被标为“system”，其源码都会被下载并解压用以执行另外一个必要的检查步骤，而关于OpenBLAS的一切直接或间接设定只能影响其会不会被编译和安装。**
 
-* **不要使用Intel oneAPI做并行化编译器，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），** 虽然toolchain一步可能会成功但后续编译步骤会出现内存爆浆问题而中断（亲身实践教训）。与oneAPI的并行编译器不同，**新的Intel oneMKL是受支持的**，但不要忘记在安装好oneMKL后进入fftw3xf目录（我的是/opt/intel/oneapi/mkl/2025.1/share/mkl/interfaces/fftw3xf）手动编译产生fftw3库文件（在该目录运行“make libintel64”；根据Makefile的设定，编译过程使用icx和gcc都可以，然而实际启动编译时如果没有检测到icx就跳过gcc检查直接报错，所以如果想用gcc必须显示指定“CC=gcc”）。根据个人测试经验，OpenMPI并行结合oneMKL数学库选项配置的CP2K在运行时会出现难以解决的内存错误，而MPICH不会，因此**总建议在使用oneMKL作为数学库时搭配MPICH作为并行化工具来配置和运行CP2K。**
+* **不要使用Intel oneAPI做并行化编译器，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），** 虽然toolchain一步可能会成功但后续编译步骤会出现内存爆浆问题而中断（亲身实践教训）。与oneAPI的并行编译器不同，**新的Intel oneMKL是受支持的**，但不要忘记在安装好oneMKL后进入fftw3xf目录（我的是/opt/intel/oneapi/mkl/2025.1/share/mkl/interfaces/fftw3xf）手动编译产生fftw3库文件（在该目录运行“make libintel64”；根据Makefile的设定，编译过程使用icx和gcc都可以，然而实际启动编译时如果没有检测到icx就跳过gcc检查直接报错，所以如果想用gcc必须显式指定“CC=gcc”）。
+
+* 根据个人测试经验，OpenMPI并行结合oneMKL数学库选项配置的CP2K在运行时会出现内存配置错误，而MPICH不会。鉴于这一情况，我建议**在使用性能更强的oneMKL作为数学库时用MPICH作为并行化工具**来配置和运行CP2K，而在使用开源的OpenBLAS、Scalapack和fftw3当数学库时放心用社区流行度更高的OpenMPI。
 
 * \--with-cmake一项默认是install，即无论系统是否装有cmake，只要没有显式指定\--with-cmake=system，toolchain都将默认自动下载和编译cmake（其他默认install的程序和库同理）。前面我已经建议大家装上cmake，所以这里加上\--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
@@ -77,7 +79,7 @@ make -j 4 ARCH=local VERSION="ssmp psmp"
 
 ***注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo apt install zlib1g命令装上zlib库，再重新运行上面的make那行命令；若看到“找不到-lsz”，则先运行sudo apt install libsz2装上libsz2库，然后运行sudo ln -s /usr/lib/x86_64-linux-gnu/libsz.so.2 /usr/lib/x86_64-linux-gnu/libsz.so创建其可被ld程序检测到的符号链接,最后重新运行上面的make命令。***
 
-现在，编译出的可执行程序都产生在了/home/uw/CP2K/src/cp2k-2025.1/exe/local目录下，这里面cp2k.popt、cp2k.psmp、cp2k.sopt、cp2k.ssmp就是我们所需要的CP2K的可执行文件了（popt和sopt在形式上分别是psmp和ssmp的符号链接，但psmp和ssmp支持OpenMP共享内存方式并行而popt和sopt不能）。
+现在，编译出的可执行程序都产生在了/home/uw/CP2K/src/cp2k-2025.1/exe/local目录下，这里面cp2k.popt、cp2k.psmp、cp2k.sopt、cp2k.ssmp就是我们所需要的CP2K的可执行文件了（后面我会对这四个文件作简要介绍）。
 
 随后，在主文件夹的.bashrc中添加如下两行：
 
