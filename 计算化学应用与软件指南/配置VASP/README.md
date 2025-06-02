@@ -6,9 +6,11 @@
 
 编译的简要步骤为：将arch文件夹里你希望选择的makefile.include选项的文件复制到软件包主目录下并去掉注释性后缀（即更名为makefile.include），然后仔细检查里面的各种参数（必要时修改），最后执行“make DEPS=1 -jN all”即可（N指编译所用核数）。
 
-一般推荐使用Intel oneAPI。对于这种方法，网上有不少配置编译VASP的教程，相差不大。唯一需要注意的是可能需要根据你所安装的Intel OneAPI版本修改“makefile.include”里面的部分内容（以v2025.0为例，修改“icc”为“icx”，“icpc”为“icpx”，“mpiifort”为“mpiifx”），以及清空MKLROOT后面的示例路径（或在整行前加#）来让编译文件读取系统默认的真实路径。另外，建议将其中的OFLAG参数里加入-xhost，这样编译器会使得编译出的程序能够利用当前机子CPU能支持的最高档次的指令集以加速计算，可以省去一些不必要的麻烦；但是注意这一选项仅严格适用于搭载Intel处理器的机子，搭载AMD处理器的机子不能使用这一选项也无法运行使用这一选项在搭载Intel处理器的机子上编译成功的程序，此时只能手动查看计算机支持的指令集并指定其最高指令集（如-mavx2即指定使用avx2指令集）以代替文件中的-xhost。
+对于Intel处理器，无疑推荐使用Intel oneAPI。对于这种方法，网上有不少配置编译VASP的教程，相差不大。唯一需要注意的是可能需要根据你所安装的Intel OneAPI版本修改“makefile.include”里面的部分内容（以v2025.0为例，修改“icc”为“icx”，“icpc”为“icpx”，“mpiifort”为“mpiifx”），以及清空MKLROOT后面的示例路径（或在整行前加#）来让编译文件读取系统默认的真实路径。另外，建议将其中的OFLAG参数里加入-xhost，这样编译器会使得编译出的程序能够利用当前机子CPU能支持的最高档次的指令集以加速计算，可以省去一些不必要的麻烦；但是注意这一选项仅严格适用于搭载Intel处理器的机子，搭载AMD处理器的机子不能使用这一选项也无法运行使用这一选项在搭载Intel处理器的机子上编译成功的程序，此时只能手动查看计算机支持的指令集并指定其最高指令集（如-mavx2即指定使用avx2指令集）以代替文件中的-xhost。
 
-根据[官网的这个链接](https://www.vasp.at/wiki/index.php/Personal_computer_installation)，也可以使用OpenMPI进行编译，对于这种方法，操作要稍麻烦一些，因为需要额外安装一些相关的库，额外进行一些“makefile.include”文件的编辑工作。对于这类情况，可以参考前面的官网指南或者[这里](https://implant.fs.cvut.cz/vasp-compilation/)的教程来配置编译VASP。
+根据[官网的这个链接](https://www.vasp.at/wiki/index.php/Personal_computer_installation)，也可以使用GCC+OpenMPI在个人计算机上进行编译。这种方法编译出来的VASP受硬件约束较小，但操作要稍麻烦一些，因为需要额外安装一些相关的库，并额外进行一些“makefile.include”文件的编辑工作。对于这类情况，可以参考前面的官网指南或者[这里](https://implant.fs.cvut.cz/vasp-compilation/)的教程来配置编译VASP。
+
+对于AMD处理器，AMD也专门提供了针对其优化的[AOCC](https://www.amd.com/zh-cn/developer/aocc.html)和[AOCL](https://www.amd.com/en/developer/aocl.html)。使用AOCC+AOCL以及依靠它们编译的OpenMPI编译VASP的教程[见此](https://implant.fs.cvut.cz/vasp-cpu-aocl/)。
 
 VASP开发者强烈建议加上HDF5的支持，此时需要注意使用的HDF5的编译环境，应与VASP的编译环境相同（即使用相同的编译器，需要在预配置HDF5时手动指定）。
 
