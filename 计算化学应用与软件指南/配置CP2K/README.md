@@ -50,7 +50,7 @@
 
 * \--with-plumed=install代表安装默认不自动装的PLUMED库，这使得CP2K可以结合PLUMED做增强采样的从头算动力学。如果你不需要此功能的话可以不加这个选项，可以节约少量编译时间。
 
-* \--with-rblite代表安装Grimme的tblite程序，要加这个必须同时加上\--with-ninja。按照CP2K的说明，tblite同时包含DFT-D4，因此这时也就不用刻意加\--with-dftd4了（即使加上了也会被自动跳过）。
+* \--with-tblite代表安装Grimme的tblite程序，要加这个必须同时加上\--with-ninja。按照CP2K的说明，tblite同时包含DFT-D4，因此这时也就不用刻意加\--with-dftd4了（即使加上了也会被自动跳过）。
 
 * \--with-sirius=no选项代表不装本来自动会装的SIRIUS库。这个库使得CP2K可以像VASP、Quantum ESPRESSO（免费）这类程序一样完全基于平面波+赝势做计算，但一般这用不上，想做这种计算的人一般直接就用VASP或者QE了。
 
