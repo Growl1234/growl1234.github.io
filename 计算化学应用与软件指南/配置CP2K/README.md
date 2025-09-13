@@ -42,9 +42,9 @@
 
 * toolchain也会自动检查系统是否存在MKL配置，如果没有检测到MKL（包括新的oneMKL，下同），一般默认安装OpenBLAS、Scalapack和fftw3等，此时如果你已经事先有安装它们（包括其中任意一个）且环境变量配置正确，最好写上例如\--with-openblas=system这样的选项；如果检查到MKL，则Scalapack和fftw3等的安装将被跳过。**注意：无论OpenBLAS是否需要作为数学库安装，也无论其是否被标为“system”，其源码都会被下载并解压用以执行另外一个必要的检查步骤，而关于OpenBLAS的一切直接或间接设定只能影响其会不会被编译和安装。**
 
-* **不要使用Intel oneAPI做并行化编译器，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），** 虽然toolchain一步可能会成功但后续编译步骤会出现内存爆浆问题而中断（亲身实践教训）。与oneAPI的并行编译器不同，**新的Intel oneMKL是受支持的**，但不要忘记在安装好oneMKL后进入fftw3xf目录（我的是/opt/intel/oneapi/mkl/2025.1/share/mkl/interfaces/fftw3xf）手动编译产生fftw3库文件（在该目录运行“make libintel64”；根据Makefile的设定，编译过程使用icx和gcc都可以，然而实际启动编译时如果没有检测到icx就跳过gcc检查直接报错，所以如果想用gcc必须显式指定“CC=gcc”）。
+* **不要使用Intel oneAPI做并行化编译器，因为CP2K（截至v2025.1）还没有做好对ifx的支持（而新的oneAPI已经不再支持较旧的ifort），** 虽然toolchain一步可能会成功但后续编译步骤会出现内存爆浆问题而中断（亲身实践教训）。与oneAPI的并行编译器不同，**新的Intel oneMKL是受支持的**；建议安装好oneMKL后进入fftw3xf目录（我的是/opt/intel/oneapi/mkl/2025.1/share/mkl/interfaces/fftw3xf）手动编译产生fftw3库文件（在该目录运行“make libintel64”；根据Makefile的设定，编译过程使用icx和gcc都可以，然而实际启动编译时如果没有检测到icx就跳过gcc检查直接报错，所以如果想用gcc必须显式指定“CC=gcc”）。
 
-* 根据个人测试经验，OpenMPI并行结合oneMKL数学库选项配置的CP2K在运行时会出现内存配置错误，而MPICH不会。鉴于这一情况，我建议在使用Intel oneMKL作为数学库时用MPICH作为并行化工具来配置和运行CP2K，而在使用开源的OpenBLAS、Scalapack和fftw3组合或直接使用AOCL（针对AMD处理器）当数学库时放心用社区流行度更高的OpenMPI。
+* 根据个人测试经验，OpenMPI并行结合oneMKL数学库选项配置的CP2K在运行时会出现内存配置错误，而MPICH不会，原因不明。鉴于这一情况，我暂且建议在使用Intel oneMKL作为数学库时用MPICH作为并行化工具来配置和运行CP2K，而在使用开源的OpenBLAS、Scalapack和fftw3组合或直接使用AOCL（针对AMD处理器）当数学库时放心用社区流行度更高的OpenMPI。
 
 * \--with-cmake一项默认是install，即无论系统是否装有cmake，只要没有显式指定\--with-cmake=system，toolchain都将默认自动下载和编译cmake（其他默认install的程序和库同理）。前面我已经建议大家装上cmake，所以这里加上\--with-cmake=system用当前系统里的cmake，能节约编译时间。
 
