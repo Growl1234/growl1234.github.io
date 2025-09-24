@@ -2,19 +2,19 @@
 
 **写在前面：**
 
-- **下面代码中可能涉及到的一些路径都是以我本人的Ubuntu系统上安放的路径为例，实际操作时千万不要忘记改成自己的！**
+- **下面代码中可能涉及到的一些路径都是以我本人的Rocky Linux系统上安放的路径为例，实际操作时千万不要忘记改成自己的！**
 
-- **如果你使用的不是Ubuntu，而是Rocky Linux等，无妨，对于这个教程，除涉及直接从apt包管理器安装的步骤换成dnf或yum等（属于Linux基本的操作常识，更何况下面的正式步骤也不怎么涉及），其他操作都是一样的。想在Windows系统上用，只能通过WSL子系统环境的Linux控制台来用，对于这种情况，我无法提供帮助（而且有什么理由不装VMware虚拟机呢？）。**
+- **如果你使用的不是Rocky Linux，而是Ubuntu等，无妨，对于这个教程，除涉及直接从dnf或yum包管理器安装的步骤换成apt等（属于Linux基本的操作常识，更何况下面的正式步骤也不怎么涉及），其他操作都是一样的。想在Windows系统上用，只能通过WSL子系统环境的Linux控制台来用，对于这种情况，我无法提供帮助（而且有什么理由不装VMware虚拟机呢？）。**
 
-- **强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。大部分以lib开头的库都包含在anaconda中，因此非常推荐在Linux上安装anaconda并在安装时选择同意写入环境变量（虽然对于CP2K的配置应该不是必需）。**
+- **强烈建议检查自己的make、cmake、gcc、g++、gfortran等绝大多数编译都需要的最基本的程序包和库有没有安装好，否则编译过程（不局限于CP2K本身）很可能会从一开始就失败。**
 
 ### 1. 下载并解压CP2K源码
 
-从[官方GitHub项目页面](https://github.com/cp2k/cp2k/releases/)直接下载即可。请选择发行文件中的cp2k-X.Y.tar.bz2文件。下载好后，解压到自己计划放置CP2K源码程序的位置（我自己的是/home/uw/CP2K/src/cp2k-2025.1）。你也可以选择git clone方式下载实时开发版本，但安装途中出现错误的几率会增大。
+从[官方GitHub项目页面](https://github.com/cp2k/cp2k/releases/)直接下载即可。请选择发行文件中的cp2k-X.Y.tar.bz2文件。下载好后，解压到自己计划放置CP2K源码程序的位置（我自己的是/root/CP2K/src/cp2k-2025.1）。你也可以选择git clone方式下载实时开发版本，但安装途中出现错误的几率会增大。
 
 ### 2. 通过源码的toochain脚本预安装需要的库
 
-切到/home/uw/CP2K/src/cp2k-2025.1/tools/toolchain文件夹，里面有一个文件“install_cp2k_toolchain.sh”，这就是我们接下来要执行的文件。
+切到/root/CP2K/src/cp2k-2025.1/tools/toolchain文件夹，里面有一个文件“install_cp2k_toolchain.sh”，这就是我们接下来要执行的文件。
 
 下面的指令会告诉你运行该脚本会涉及的库和程序，以及默认的配置选项：
 
@@ -66,26 +66,26 @@
 
 （大部分内容搬运自sobereva的文章，我根据自己的情况改写/补充了点内容）
 
-接着上一节，现在把/home/uw/CP2K/src/cp2k-2025.1/tools/toolchain/install/arch目录下所有文件拷到/home/uw/CP2K/src/cp2k-2025.1/arch目录下。这些文件定义了编译不同版本的CP2K所需的参数，其内容是toolchain脚本根据装的库和当前环境自动产生的。
+接着上一节，现在把/root/CP2K/src/cp2k-2025.1/tools/toolchain/install/arch目录下所有文件拷到/root/CP2K/src/cp2k-2025.1/arch目录下。这些文件定义了编译不同版本的CP2K所需的参数，其内容是toolchain脚本根据装的库和当前环境自动产生的。
 
-然后在/home/uw/CP2K/src/cp2k-2025.1目录（编译目录）下运行以下命令：
+然后在/root/CP2K/src/cp2k-2025.1目录（编译目录）下运行以下命令：
 
 ```shell
-source /home/uw/CP2K/src/cp2k-2025.1/tools/toolchain/install/setup
-make -j 4 ARCH=local VERSION="ssmp psmp"
+source /root/CP2K/src/cp2k-2025.1/tools/toolchain/install/setup
+make -j 24 ARCH=local VERSION="ssmp psmp"
 ```
 
 -j后面的数字是并行编译用的进程数（核数）。第一个命令可以直接去相应路径source setup后，再退回编译目录执行第二个命令。
 
-***注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo apt install zlib1g命令装上zlib库，再重新运行上面的make那行命令；若看到“找不到-lsz”，则先运行sudo apt install libsz2装上libsz2库，然后运行sudo ln -s /usr/lib/x86_64-linux-gnu/libsz.so.2 /usr/lib/x86_64-linux-gnu/libsz.so创建其可被ld程序检测到的符号链接,最后重新运行上面的make命令。***
+***注：如果编译中途报错，并且从后往前找error的时候看到“找不到-lz”的报错提示，则运行sudo dnf install zlibng命令装上zlib库，再重新运行上面的make那行命令。***
 
-现在，编译出的可执行程序都产生在了/home/uw/CP2K/src/cp2k-2025.1/exe/local目录下，这里面cp2k.popt、cp2k.psmp、cp2k.sopt、cp2k.ssmp就是我们所需要的CP2K的可执行文件了（后面我会对这四个文件作简要介绍）。
+现在，编译出的可执行程序都产生在了/root/CP2K/src/cp2k-2025.1/exe/local目录下，这里面cp2k.popt、cp2k.psmp、cp2k.sopt、cp2k.ssmp就是我们所需要的CP2K的可执行文件了（后面我会对这四个文件作简要介绍）。
 
 随后，在主文件夹的.bashrc中添加如下两行：
 
 ```shell
-source /home/uw/CP2K/src/cp2k-2025.1/tools/toolchain/install/setup
-export PATH=/home/uw/CP2K/src/cp2k-2025.1/exe/local:$PATH
+source /root/CP2K/src/cp2k-2025.1/tools/toolchain/install/setup
+export PATH=/root/CP2K/src/cp2k-2025.1/exe/local:$PATH
 ```
 
 然后重新进入终端或者在当前终端运行指令：
