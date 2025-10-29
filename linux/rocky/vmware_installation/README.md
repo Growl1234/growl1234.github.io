@@ -6,7 +6,6 @@
 
 ### 1. 下载Rocky Linux 10的ISO镜像
 
-
 ### 2. 安装VMware Workstation Pro
 
 在Broadcom Support网站上注册用户，免费下载和安装VMware Workstation Pro（最新版为25H2，就Rocky Linux 10的安装和使用体验来讲相对17.x版有明显改进）。过程稍显麻烦，不想折腾的可以直接问我（uwsy1059@qq.com）要安装包。
