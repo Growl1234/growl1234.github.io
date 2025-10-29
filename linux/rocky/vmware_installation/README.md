@@ -16,12 +16,12 @@
 
 （2）依次按下图操作：（保留默认选项即可的页面没有给出）
 
-![vmware](/linux/rocky/vmware_installation/1.png)
-![vmware](/linux/rocky/vmware_installation/2.png)
-![vmware](/linux/rocky/vmware_installation/3.png)
-![vmware](/linux/rocky/vmware_installation/4.png)
-![vmware](/linux/rocky/vmware_installation/5.png)
-![vmware](/linux/rocky/vmware_installation/6.png)
+![vmware](/linux/rocky/vmware_installation/1.png =400x)
+![vmware](/linux/rocky/vmware_installation/2.png =400x)
+![vmware](/linux/rocky/vmware_installation/3.png =400x)
+![vmware](/linux/rocky/vmware_installation/4.png =400x)
+![vmware](/linux/rocky/vmware_installation/5.png =400x)
+![vmware](/linux/rocky/vmware_installation/6.png =400x)
 
 ### 4. 启动虚拟机，加载系统安装映像
 
