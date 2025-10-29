@@ -14,11 +14,11 @@ ___
 
 [Gaussian支持的基组以及输入基组时的一些注意事项](http://gaussian.com/basissets/)
 
-[Exploring Chemistry with Electronic Structure Methods (2nd edition)](/applications/ExpChem_2e.pdf)
+[Exploring Chemistry with Electronic Structure Methods (2nd edition)](/applications/Gaussian/ExpChem_2e.pdf)
 
-[Gaussian 量子化学计算手册（ExpChem第二版中文节译本）](/applications/ExpChem_2e_Chinese_partly.pdf)
+[Gaussian 量子化学计算手册（ExpChem第二版中文节译本）](/applications/Gaussian/ExpChem_2e_Chinese_partly.pdf)
 
-[向Slurm集群提交Gaussian任务的两个注意事项](/applications/Gaussian/slurm.md)
+[向Slurm集群提交Gaussian任务的两个注意事项](/applications/Gaussian/slurm/)
 
 ### 适用于ORCA
 
@@ -30,7 +30,7 @@ ___
 
 ___
 
-[关于配置VASP和一些重要工具（vaspkit、VTST）的简要说明](/applications/VASP/installation_with_extra_tools.md)
+[关于配置VASP和一些重要工具（vaspkit、VTST）的简要说明](/applications/VASP/installation_with_extra_tools/)
 
 [Learn VASP the Hard Way](https://www.bigbrosci.com/)
 
@@ -40,7 +40,7 @@ ___
 
 ___
 
-[从源代码配置CP2K](/applications/CP2K/installation.md)
+[从源代码配置CP2K](/applications/CP2K/installation/)
 
 [卢天（Sobereva）：驳网上流传的对CP2K缺点的不实描述](http://sobereva.com/729)
 
