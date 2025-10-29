@@ -21,4 +21,4 @@ ___
 
 [计算化学应用与软件指南](/applications/)
 
-[Linux使用杂谈（Rocky Linux为主）](/linux/)（还没弄好）
+[Linux使用杂谈（Rocky Linux为主）](/linux/)
