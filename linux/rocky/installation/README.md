@@ -53,7 +53,7 @@
 3. 建议运行指令“dnf install epel-release -y”安装EPEL，这个是Fedora专门为红帽系列的下游分发制作的软件仓库，包含了很多重要但官方仓库没有收录的程序包，对于很多额外的功能和体验都是必需的。安装完EPEL后，一般建议运行“/usr/sbin/crb enable”启用CRB库（Codeready Builder）。对于10.0版本，EPEL的repo文件的指向链接通常带有“{$releasever+-z}”字样，个人建议手动去掉。
 4. 建议添加国内flathub源方便从GNOME软件管理器下载一些可能需要的桌面程序。教程见https://mirrors.ustc.edu.cn/help/flathub.html。
 5. 推荐使用GNOME Tweaks（优化工具）和GNOME Shell Extensions（扩展工具管理器）来对自己系统的GNOME图形界面自定义，弥补原生GNOME桌面的一些不方便之处；其中又建议安装Dash to Dock、GTK4 Desktop Icons NG (DING；如果是9.6版本选不带GTK4的)、AppIndicator and KStatusNotifierItem Support三个扩展。如果再在系统中安装ntfs-3g，还可以直接读取Windows系统下的硬盘和文件。
-
+6. 如果不愿直接用root又嫌sudo操作要输入密码麻烦，可以执行“sudo visudo”指令编辑相应管理文件，找到“Same thing without a password”一行，把下面的“# %wheel	ALL=(ALL)	NOPASSWD: ALL”一行去掉注释（即最前面的“#”）即可。
 
 
 
