@@ -14,7 +14,7 @@ ___
 
 [Rocky Linux 10在虚拟机上的安装](/linux/rocky/vmware_installation/)
 
-[Rocky Linux安装NVIDIA显卡驱动](/linux/rocky/nvidia/)
+[Rocky Linux安装NVIDIA显卡驱动的基本步骤和注意事项](/linux/rocky/nvidia/)
 
 ### 乱谈各大Linux发行版的个人使用体验
 
