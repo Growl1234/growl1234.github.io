@@ -13,7 +13,7 @@
 ### 1. 下载Rocky Linux的ISO镜像
 
 
-在国内尤其校园网环境下，最佳下载地址是[中科大的镜像源](https://mirrors.ustc.edu.cn/)（如果在校园网推荐切换到[IPv6版本](https://ipv6.mirrors.ustc.edu.cn/)）；进入后在列表找到rocky，然后依次：$version --> isos --> x86_64，点击下载“Rocky-$version -x86_64-dvd.iso”。
+在国内尤其校园网环境下，最佳下载地址是[中科大的镜像源](https://mirrors.ustc.edu.cn/)（如果在校园网推荐切换到[IPv6版本](https://ipv6.mirrors.ustc.edu.cn/)）；进入后在列表找到rocky，然后依次：$version → isos → x86_64，点击下载“Rocky-$version -x86_64-dvd.iso”。
 
 *（注：$version代指版本号，目前最新的受支持版本分别为8.10、9.6和10.0。我自己用的是10.0，如果担忧新出不久的大版本的稳健性可以选择9.6；8.10偏老，不做推荐）*
 
