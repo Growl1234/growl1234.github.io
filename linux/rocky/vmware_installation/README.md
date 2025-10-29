@@ -17,18 +17,18 @@
 （2）依次按下图操作：（保留默认选项即可的页面没有给出）
 
 <center>
- <img src="1.png" width="45%">
- <img src="2.png" width="45%">
+ <img src="1.png" width="45%" alt="步骤1">
+ <img src="2.png" width="45%" alt="步骤2">
 </center>
 
 <center>
- <img src="3.png" width="45%">
- <img src="4.png" width="45%">
+ <img src="3.png" width="45%" alt="步骤3">
+ <img src="4.png" width="45%" alt="步骤4">
 </center>
 
 <center>
- <img src="5.png" width="45%">
- <img src="6.png" width="45%">
+ <img src="5.png" width="45%" alt="步骤5">
+ <img src="6.png" width="45%" alt="步骤6">
 </center>
 
 ### 4. 启动虚拟机，加载系统安装映像
