@@ -8,11 +8,13 @@
 
 ___
 
-[Rocky Linux的安装以及一些初步的使用建议](/linux/rocky_installation/)
+**【注：本部分文章均默认你的CPU是x86_64架构，且同时也适用于除Rocky Linux外的其他基于Red Hat Enterprise Linux的发行版（包括RHEL本尊及其中游CentOS Stream，但不包括上游Fedora）。】**
 
-[Rocky Linux 10在虚拟机上的安装](/linux/rocky_vmware_installation/)
+[Rocky Linux的安装以及一些初步的使用建议](/linux/rocky/installation/)
 
-[Rocky Linux安装NVIDIA显卡驱动](/linux/rocky_nvidia/)
+[Rocky Linux 10在虚拟机上的安装](/linux/rocky/vmware_installation/)
+
+[Rocky Linux安装NVIDIA显卡驱动](/linux/rocky/nvidia/)
 
 ### 乱谈各大Linux发行版的个人使用体验
 
