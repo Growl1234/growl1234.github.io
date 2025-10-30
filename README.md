@@ -1,5 +1,7 @@
 # Home - Growl1234
 
+## <font color=red>This page is no longer updated. Please visit [https://growl1234.readthedocs.io/](https://growl1234.readthedocs.io/).<br></br>本网页已不再更新，请移步[https://growl1234.readthedocs.io/](https://growl1234.readthedocs.io/)。</font>
+
 ## Welcome! 
 
 
