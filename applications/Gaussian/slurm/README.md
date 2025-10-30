@@ -1,4 +1,4 @@
-## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
+## <font color=red>This website is no longer updated, and all PDF files have been removed. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
 
 ## 向Slurm集群提交Gaussian任务的两个注意事项
 

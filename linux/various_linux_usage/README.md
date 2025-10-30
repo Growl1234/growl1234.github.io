@@ -1,4 +1,4 @@
-## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
+## <font color=red>This website is no longer updated, and all PDF files have been removed. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
 
 ## 各大Linux发行版的简要介绍和个人初步使用体验杂谈
 
