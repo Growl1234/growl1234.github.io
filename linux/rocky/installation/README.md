@@ -1,5 +1,7 @@
 ## Rocky Linux的安装以及一些初步的使用建议
 
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+
 ***Last Updated: 2025-09-21***
 
 
@@ -19,7 +21,7 @@
 
 ### 2. 制作U盘启动盘
 
-选择合适的写入工具将ISO写入U盘。个人强烈推荐将开源、免费的[Ventoy](https://www.ventoy.net/)作为此类工具的首选，其一大特色是使用Ventoy配置后的U盘可以直接在文件资源管理器中粘贴ISO镜像文件，非常方便。如果想用常规型工具，应当参考[Rocky Linux官方文档相应页面](https://wiki.rockylinux.org/rocky/image/)给出的推荐和避雷
+选择合适的写入工具将ISO写入U盘。个人强烈推荐将开源、免费的[Ventoy](https://www.ventoy.net/)作为此类工具的首选，其一大特色是使用Ventoy配置后的U盘可以直接在文件资源管理器中粘贴ISO镜像文件，非常方便。如果想用常规型工具，应当参考[Rocky Linux官方文档相应页面](https://wiki.rockylinux.org/rocky/image/)给出的推荐和避雷。
 
 ### 3. 重启电脑，加载U盘启动盘
 
@@ -50,7 +52,7 @@
 
 1. 将repo源更换为国内镜像源往往会对下载速度有明显提升，建议安装完后初次打开系统首先操作这个。个人推荐中科大镜像源，教程见[https://mirrors.ustc.edu.cn/help/rocky.html](https://mirrors.ustc.edu.cn/help/rocky.html)（针对Rocky Linux官方源）和[https://mirrors.ustc.edu.cn/help/epel.html](https://mirrors.ustc.edu.cn/help/epel.html)（针对下面会提到的EPEL源）。
 2. 强烈建议安装并换源完毕后首先运行“dnf update -y”将系统关键组件（尤其是Linux内核即kernel）更新到最新版本。
-3. 建议运行指令“dnf install epel-release -y”安装EPEL，这个是Fedora专门为红帽系列的下游分发制作的软件仓库，包含了很多重要但官方仓库没有收录的程序包，对于很多额外的功能和体验都是必需的。安装完EPEL后，一般建议运行“/usr/sbin/crb enable”启用CRB库（Codeready Builder）。对于10.0版本，EPEL的repo文件的指向链接通常带有“{$releasever+-z}”字样，个人建议手动去掉。
+3. 建议运行指令“dnf install epel-release -y”安装EPEL，这个是Fedora专门为红帽系列的下游分发制作的软件仓库，包含了很多重要但官方仓库没有收录的程序包，对于很多额外的功能和体验都是必需的。安装完EPEL后，一般建议运行“/usr/sbin/crb enable”启用CRB仓库（Codeready Builder）。对于10.0版本，EPEL的repo文件的指向链接通常带有“{$releasever+-z}”字样，个人建议手动去掉。
 4. 建议添加国内flathub源方便从GNOME软件管理器下载一些可能需要的桌面程序。教程见[https://mirrors.ustc.edu.cn/help/flathub.html](https://mirrors.ustc.edu.cn/help/flathub.html)。
 5. 推荐使用GNOME Tweaks（优化工具）和GNOME Shell Extensions（扩展工具管理器）来对自己系统的GNOME图形界面自定义，弥补原生GNOME桌面的一些不方便之处；其中又建议安装Dash to Dock、GTK4 Desktop Icons NG (DING；如果是9.6版本选不带GTK4的)、AppIndicator and KStatusNotifierItem Support三个扩展。如果再在系统中安装ntfs-3g，还可以直接读取Windows系统下的硬盘和文件。
 6. 如果不愿直接用root又嫌sudo操作要输入密码麻烦，可以执行“sudo visudo”指令编辑相应管理文件，找到“Same thing without a password”一行，把下面的“# %wheel	ALL=(ALL)	NOPASSWD: ALL”一行去掉注释（即最前面的“#”）即可。

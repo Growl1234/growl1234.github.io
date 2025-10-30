@@ -1,5 +1,7 @@
 # 线性代数
 
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+
 ### 线性代数是学习量子化学以及理论与计算化学必不可少的数学基础之一。
 
 这里列出个人推荐的教材或参考书，供有兴趣者和自学者参考。

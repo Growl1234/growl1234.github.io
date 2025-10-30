@@ -1,5 +1,7 @@
 ## 各大Linux发行版的简要介绍和个人初步使用体验杂谈
 
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+
 ***Last Updated: 2025-10-29***
 
 

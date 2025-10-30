@@ -1,5 +1,7 @@
 ## Rocky Linux安装NVIDIA显卡驱动的基本步骤和注意事项
 
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+
 ***Last Updated: 2025-09-21***
 
 **【写在前面：本文只是一些对官网教程的整理和补充，部分步骤官网给了很详细的教程我就直接贴链接了，不再赘述。】**

@@ -1,5 +1,7 @@
 ## 向Slurm集群提交Gaussian任务的两个注意事项
 
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+
 **先说注意事项，后面解释原因：（假设并行核数64）**
 
 -	**不能只在Slurm提交脚本中指定并行CPU核数，必须在Gaussian输入文件中同时通过 “nprocshared=64” 指定，且两个地方指定的并行核数应当相同。**

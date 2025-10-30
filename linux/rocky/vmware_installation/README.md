@@ -1,5 +1,7 @@
 ## Rocky Linux 10在虚拟机上的安装
 
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+
 ***Last Updated: 2025-10-27***
 
 **【写在前面：读这篇文章前吐血建议读者先认真看看我的[“Rocky Linux的安装以及一些初步的使用建议”](/linux/rocky/installation/)这篇文章，下面涉及的部分重复内容我已经在里写得很详细了，因此不再赘述，仅在有可能的不同点时加一些补充。那篇文章最后的“一些额外的使用建议”对虚拟机也一样适用。】**

@@ -1,3 +1,5 @@
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+
 ### Instructor's Solutions Manual to Accompany "Linear Algebra and Its Applications (6th edition)"
 
 [Title Page](/linear_algebra/Linear_Algebra_and_Its_Applications_6e/solutions_manual/013586609X_Lay_ISM_LA_FM_sec.pdf)

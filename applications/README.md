@@ -1,5 +1,6 @@
 ## 计算化学应用与软件指南
 
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
 
 
 这里收录了一些关于如何应用计算化学和使用计算化学程序的资料，其中包含大量外部链接。

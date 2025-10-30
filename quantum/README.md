@@ -1,5 +1,6 @@
 ## 量子化学理论与计算化学方法
 
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
 
 
 这里收录了一些与量子化学和计算化学相关的基础知识的外文书籍。
