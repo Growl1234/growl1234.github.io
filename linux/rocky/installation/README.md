@@ -1,6 +1,6 @@
-## Rocky Linux的安装以及一些初步的使用建议
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
 
-## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+## Rocky Linux的安装以及一些初步的使用建议
 
 ***Last Updated: 2025-09-21***
 

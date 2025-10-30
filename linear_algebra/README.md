@@ -1,6 +1,6 @@
-# 线性代数
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
 
-## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+# 线性代数
 
 ### 线性代数是学习量子化学以及理论与计算化学必不可少的数学基础之一。
 

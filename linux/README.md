@@ -1,7 +1,6 @@
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
+
 ## Linux使用杂谈
-
-## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
-
 
 这里写了写关于Linux的东西。所有实践步骤均为本人亲自操作过的，所有体验和吐槽也均为本人真实使用过后的感受（也因此主观性略强，仅供参考）。
 

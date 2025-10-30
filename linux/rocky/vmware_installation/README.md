@@ -1,6 +1,6 @@
-## Rocky Linux 10在虚拟机上的安装
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
 
-## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+## Rocky Linux 10在虚拟机上的安装
 
 ***Last Updated: 2025-10-27***
 

@@ -1,6 +1,6 @@
-## 向Slurm集群提交Gaussian任务的两个注意事项
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
 
-## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+## 向Slurm集群提交Gaussian任务的两个注意事项
 
 **先说注意事项，后面解释原因：（假设并行核数64）**
 

@@ -1,6 +1,6 @@
-## 从源代码配置CP2K
+## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a> instead.</font>
 
-## <font color=red>This website is no longer updated. Please visit <a href="https://growl1234.readthedocs.io/">https://growl1234.readthedocs.io/</a>.</font>
+## 从源代码配置CP2K
 
 ***Last Updated: 2025-10-30***
 
